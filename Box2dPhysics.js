@@ -45,6 +45,7 @@ var Physics = window.Physics = function(element,elementTwo,elementThree,aContext
     this.amplitude = 0.1;
     this.audioContext = aContext;
     this.setWords();
+   
 };
 
 Physics.prototype.setWords = function() {
@@ -201,7 +202,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
     ctx.save();
     ctx.fillStyle = "black";
     var fontSize = 18;
-    var font = "bold " + fontSize +"px serif";
+    var font = fontSize +"px courier";
     ctx.font = font;
     ctx.textBaseline = "top";
     var text = "";
@@ -257,7 +258,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.setWords();
             this.numberOfHaikus = this.numberOfHaikus + 1;
             if(this.numberOfHaikus == 5) {
-                this.textPosX = this.textPosX + 320;
+                this.textPosX = this.textPosX + 426.666;
                 this.numberOfHaikus = 0;
                 this.textPosY = 0.0;
             }

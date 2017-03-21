@@ -170,11 +170,11 @@ Body.prototype.drawTwo = function (context,text) {
         
         switch (this.details.shape) {
             case "circle":
-                var font = "bold " + this.details.radius +"px serif";
+                var font = "bold " + this.details.radius +"px courier";
                 context.font = font;
                 context.textBaseline = "top";
                 context.strokeStyle = "black";
-                context.lineWidth = 3;
+                context.lineWidth = 1;
                 context.strokeText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
                 context.fillText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
                 
