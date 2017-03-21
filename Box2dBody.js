@@ -215,7 +215,7 @@ Body.prototype.PlayTone = function(caller) {
         this.player = caller;
         this.aSineWave = new SineWave(physics.audioContext);
         // this.setToneByYLocation();
-        this.aSineWave.setFrequency(this.details.tone);
+        this.aSineWave.setFrequency(this.GetFreq());
         this.aSineWave.setAmplitude(this.amplitude);
         //   for (var i = 0; i < this.connections.length; i++) {
         //     this.aSineWave.getOutNode().connect(this.connections[i]);
@@ -231,4 +231,15 @@ Body.prototype.PauseTone = function (caller) {
             this.aSineWave.pause();
         }
     }
+}
+
+Body.prototype.GetFreq = function() {
+    var halfSteps = [0,4,5,7,11,12];
+    var halfStepsTwo = [0,2,6,7,9,11];
+    var freq = 0.0;
+    if(this.details.wordType == "noun" || this.details.wordType == "verb")
+        freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
+    if(this.details.wordType == "adj" || this.details.wordType == "adv")
+        freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
+    return freq;
 }

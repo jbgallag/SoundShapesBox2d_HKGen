@@ -27,6 +27,7 @@ var Physics = window.Physics = function(element,elementTwo,elementThree,aContext
     this.changeCountMax = 30;
     
     //haiku
+    this.numberOfHaikus = 0;
     this.sylsLeftInLineOne = 5;
     this.sylsLeftInLineTwo = 7;
     this.sylsLeftInLineThree = 5;
@@ -199,7 +200,8 @@ Physics.prototype.RenderWorldTwo = function(ctx) {
 Physics.prototype.RenderText = function(ctx,wtype) {
     ctx.save();
     ctx.fillStyle = "black";
-    var font = "bold " + 15 +"px serif";
+    var fontSize = 18;
+    var font = "bold " + fontSize +"px serif";
     ctx.font = font;
     ctx.textBaseline = "top";
     var text = "";
@@ -227,8 +229,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.ResetBodiesNotHit(this.sylsLeftInLineOne);
         if(this.sylsLeftInLineOne == 0) {
             this.myText = "";
-            this.textPosX = 0;
-            this.textPosY = this.textPosY + 15;
+            this.textPosY = this.textPosY + fontSize;
             this.sylsLeftInLineOne = 5;
             this.activeLine = this.activeLine + 1;
             this.setWords();
@@ -239,8 +240,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
         if(this.sylsLeftInLineTwo == 0) {
             this.myText = "";
-            this.textPosX = 0;
-            this.textPosY = this.textPosY + 15;
+            this.textPosY = this.textPosY + fontSize;
             this.sylsLeftInLineTwo = 7;
             this.activeLine = this.activeLine + 1;
             this.setWords();
@@ -251,11 +251,16 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.ResetBodiesNotHit(this.sylsLeftInLineThree);
         if(this.sylsLeftInLineThree == 0) {
             this.myText = "";
-            this.textPosX = 0;
-            this.textPosY = this.textPosY + (15*4);
+            this.textPosY = this.textPosY + (fontSize*3);
             this.sylsLeftInLineThree = 5;
             this.activeLine = 1;
             this.setWords();
+            this.numberOfHaikus = this.numberOfHaikus + 1;
+            if(this.numberOfHaikus == 5) {
+                this.textPosX = this.textPosX + 320;
+                this.numberOfHaikus = 0;
+                this.textPosY = 0.0;
+            }
         }
       }
     ctx.restore();
