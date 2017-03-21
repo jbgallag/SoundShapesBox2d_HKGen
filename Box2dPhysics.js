@@ -257,10 +257,18 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.activeLine = 1;
             this.setWords();
             this.numberOfHaikus = this.numberOfHaikus + 1;
-            if(this.numberOfHaikus == 5) {
+            this.contextTwo.clearRect(0,0,this.elementTwo.width,this.elementTwo.height);
+            this.contextTwo.fillStyle = "lightgray";
+            this.contextTwo.fillRect(0,0,this.elementTwo.width,this.elementTwo.height);
+            if(this.numberOfHaikus % 5 == 0) {
                 this.textPosX = this.textPosX + 426.666;
-                this.numberOfHaikus = 0;
                 this.textPosY = 0.0;
+                if(this.numberOfHaikus == 15) {
+                    this.contextThree.clearRect(0,0,this.elementThree.width,this.elementThree.height);
+                    this.textPosY = 0.0;
+                    this.textPosX = 0.0;
+                    this.numberOfHaikus = 0;
+                }
             }
         }
       }
