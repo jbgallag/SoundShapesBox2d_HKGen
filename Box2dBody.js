@@ -1,7 +1,7 @@
 var Body = window.Body = function (physics, details) {
     this.details = details;
        
-    
+    this.aSineWave = new SineWave(physics.audioContext);
     // Create the definition
     this.definition = new b2BodyDef();
     
@@ -213,7 +213,7 @@ Body.prototype.PlayTone = function(caller) {
     if(!this.playing) {
         this.playing = true;
         this.player = caller;
-        this.aSineWave = new SineWave(physics.audioContext);
+        //this.aSineWave = new SineWave(physics.audioContext);
         // this.setToneByYLocation();
         this.aSineWave.setFrequency(this.GetFreq());
         this.aSineWave.setAmplitude(this.amplitude);

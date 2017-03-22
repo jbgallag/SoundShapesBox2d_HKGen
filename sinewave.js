@@ -12,10 +12,16 @@ SineWave = function(context) {
   this.amplitude = 0.1;
   this.playing = false;
   this.osc = this.context.createOscillator();
+  this.osc2 = this.context.createOscillator();
+  this.osc3 = this.context.createOscillator();
   this.gain = this.context.createGain();
   this.gain.gain.value = 0;
   this.osc.connect(this.gain);
+  this.osc2.connect(this.gain);
+  this.osc3.connect(this.gain);
   this.osc.start(0);
+    this.osc2.start(0);
+    this.osc3.start(0);
   /*this.fmosc = this.context.createOscillator();
   this.fmosc.frequency.value = 4;
   this.fmosc.start(0);
@@ -38,6 +44,8 @@ SineWave.prototype.play = function() {
   if (!this.playing) {
     this.getOutNode().connect(this.context.destination);
     this.osc.frequency.value = this.frequency;
+      this.osc2.frequency.value = this.frequency*0.5;
+      this.osc3.frequency.value = this.frequency*2.0;
     this.gain.gain.setValueAtTime(0, this.context.currentTime);
     this.gain.gain.linearRampToValueAtTime(this.amplitude*1.5, 0.001 + this.context.currentTime);
     this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.1 + this.context.currentTime);
