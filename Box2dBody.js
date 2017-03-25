@@ -81,14 +81,15 @@ Body.prototype.draw = function (context,text) {
     var pos = this.body.GetPosition(),
     angle = this.body.GetAngle();
     var vel = this.body.GetLinearVelocity();
-    
+    var angVel = this.body.GetAngularVelocity();
+    if(angVel != 0.0)
+        this.aSineWave.setFmFrequency(Math.abs(angVel)*0.5);
     // Save the context
     context.save();
     
     // Translate and rotate
     context.translate(pos.x, pos.y);
     context.rotate(angle);
-    
     
     // Draw the shape outline if the shape has a color
     if (this.details.color) {
@@ -216,6 +217,7 @@ Body.prototype.PlayTone = function(caller) {
         //this.aSineWave = new SineWave(physics.audioContext);
         // this.setToneByYLocation();
         this.aSineWave.setFrequency(this.GetFreq());
+        //this.aSineWave.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
         this.aSineWave.setAmplitude(this.amplitude);
         //   for (var i = 0; i < this.connections.length; i++) {
         //     this.aSineWave.getOutNode().connect(this.connections[i]);
@@ -237,9 +239,19 @@ Body.prototype.GetFreq = function() {
     var halfSteps = [0,4,5,7,11,12];
     var halfStepsTwo = [0,2,6,7,9,11];
     var freq = 0.0;
-    if(this.details.wordType == "noun" || this.details.wordType == "verb")
-        freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
-    if(this.details.wordType == "adj" || this.details.wordType == "adv")
-        freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
+    if(this.details.wordType == "noun" || this.details.wordType == "verb") {
+        if(Math.random() > 0.5) {
+            freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
+        } else {
+            freq = this.details.tone / Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
+        }
+    }
+        if(this.details.wordType == "adj" || this.details.wordType == "adv") {
+            if(Math.random() > 0.5) {
+                freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
+            } else {
+                freq = this.details.tone / Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
+            }
+        }
     return freq;
 }
