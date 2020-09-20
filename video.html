@@ -3,18 +3,14 @@
     <head>
         <title>Web Fun</title>
         <meta charset="utf-8">
-            <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-                <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-                <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-                <script type="text/javascript" src="adapter.js"></script>
+                <script src="https://webrtc.github.io/adapter/adapter-latest.js"></script>
                 <script type="text/javascript" src="Box2dWeb-2.1.a.3.js"></script>
                 <script type="text/javascript" src="Box2dPhysics.js"></script>
                 <script type="text/javascript" src="Box2dBody.js"></script>
                 <script type="text/javascript" src="sinewave.js"></script>
                  <script type="text/javascript" src="words.js"></script>
-           
-                <link rel="stylesheet" href="ss.css">
-                <script>
+          
+                <script> 
                 var firstStart = true;
                 var streamAttached = false;
                 //box2d vars
@@ -63,8 +59,8 @@
                // var img = new Image();
                // img.src = "/Users/jbgallag/SoundShapesBox2d/text1.png";
                // img.crossOrigin = 'anonymous';
-                window.onload = init;
-                
+		 startMedia();
+                window.onload = init; 
                 function init() {
                    
                     output = document.querySelector('#output');
@@ -72,7 +68,7 @@
                     textOutput = document.querySelector('#textOutput');
                     localVideo = document.querySelector('#localVideo');
                     oContext = output.getContext('2d');
-                    
+ 
                     localVideo.onloadstart = function() {
                         physics = window.physics = new Physics(output,drawing,textOutput,aContext,myWords,2);
                         
@@ -117,9 +113,10 @@
                                                
                                                
                 }
-                function startMedia() {
-                    var constraints = {video: true, audio: true};
-                    getUserMedia(constraints, handleUserMedia, handleUserMediaError);
+                async function startMedia() {
+                    var constraints = {video: true, audio: false};
+                    localStream = await navigator.mediaDevices.getUserMedia(constraints)
+		    localVideo.srcObject = localStream;
                     console.log('Getting user media with constraints', constraints);
                 }
                 
@@ -147,14 +144,13 @@
                         drawing.style.width = localVideo.clientWidth +'px';
                         drawing.style.height = localVideo.clientHeight + 'px';
                     }
-
-                    var tmpCanvas = document.getElementById("output");
+                    var tmpCanvas = document.getElementById('output');
                     var tmpContext = tmpCanvas.getContext('2d');
                     tmpContext.save();
                     tmpContext.translate(output.width/2, output.height/2);
                     tmpContext.scale(-1,1);
                     tmpContext.translate(-output.width/2, -output.height/2);
-                    tmpContext.drawImage(video,0,0,output.width,output.height);
+                    tmpContext.drawImage(document.getElementById('localVideo'),0,0,output.width,output.height);
                     imgData = tmpContext.getImageData(0, 0, output.width,output.height);
                     tmpContext.restore();
                     
@@ -178,20 +174,20 @@
                     requestAnimFrame(function() { animate(video, tmpContext); });
                     frameCount++;
                 }
-                
-                startMedia();
+                  //animate(localVideo, oContext);
+ 
                 </script>
             </head>
         <body>
             <div>
-                <canvas id='output' ></canvas>
-                <canvas id='drawing'></canvas>
+                <canvas id='output' width="640" height="480" style='float:left'></canvas>
+                <canvas id='drawing' width="640" height="480" style='float:left'></canvas>
+	    </div>
+	    <div>	
+                <canvas id='textOutput' width="1280" height="720"></canvas>
             </div>
             <div>
-                <canvas id='textOutput' width="1280" height="768"></canvas>
-            </div>
-            <div>
-                <video id='localVideo' muted  autoplay style='visibility:hidden'></video>
+                <video id='localVideo' width="640" height="480" playsinline autoplay></video>
             </div>
 
         </body>

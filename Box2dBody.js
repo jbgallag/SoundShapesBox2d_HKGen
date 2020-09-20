@@ -243,7 +243,7 @@ Body.prototype.GetFreq = function() {
         if(Math.random() > 0.5) {
             freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
         } else {
-            freq = this.details.tone / Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
+            freq = this.details.tone / Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfSteps.length)]);
         }
     }
         if(this.details.wordType == "adj" || this.details.wordType == "adv") {
