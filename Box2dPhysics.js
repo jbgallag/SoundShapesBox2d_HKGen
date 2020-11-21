@@ -1,5 +1,4 @@
 var Physics = window.Physics = function(element,elementThree,aContext,myWords,scale) {
-    var worldWidth = 1080;
     var gravity = new b2Vec2(0,4.8);
     this.world = new b2World(gravity, true);
     this.element = element;
@@ -534,6 +533,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
     var ySqr = 0;
     var diffMag = 0;
     var hit = false;
+    var worldWidth = 1080;
     if(body.details.type != "static" && !body.details.impulseActive) {
         var yStart = Math.round(body.body.GetWorldCenter().y*2 - body.details.radius)
         var yEnd  = Math.round(body.body.GetWorldCenter().y*2 + body.details.radius);
