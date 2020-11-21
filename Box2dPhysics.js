@@ -138,7 +138,7 @@ Physics.prototype.step = function (dt,imgData,oldData) {
                         3); // position iterations
     }
     this.RenderWorld(imgData,oldData,this.context,this.contextThree);
-    this.RenderWorldTwo(this.contextTwo);
+    //this.RenderWorldTwo(this.contextTwo);
    }
 
 Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
@@ -176,7 +176,7 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
     }
     ctx.restore();
 }
-Physics.prototype.RenderWorldTwo = function(ctx) {
+/*Physics.prototype.RenderWorldTwo = function(ctx) {
     var obj = this.world.GetBodyList();
     
     ctx.save();
@@ -196,7 +196,7 @@ Physics.prototype.RenderWorldTwo = function(ctx) {
         obj = obj.GetNext();
     }
     ctx.restore();
-}
+}*/
 
 Physics.prototype.RenderText = function(ctx,wtype) {
     ctx.save();
