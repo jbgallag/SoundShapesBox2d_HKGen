@@ -30,7 +30,6 @@
                 
                 var oContext;
                 var output;
-                var drawing;
                 var textOutput;
                 var localVideo;
                 var localStream;
@@ -64,13 +63,12 @@
                 function init() {
                    
                     output = document.querySelector('#output');
-                    drawing = document.querySelector('#drawing');
                     textOutput = document.querySelector('#textOutput');
                     localVideo = document.querySelector('#localVideo');
                     oContext = output.getContext('2d');
  
                     localVideo.onloadstart = function() {
-                        physics = window.physics = new Physics(output,drawing,textOutput,aContext,myWords,2);
+                        physics = window.physics = new Physics(output,textOutput,aContext,myWords,2);
                         
                         // Create some walls
                         new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 10,  width: 640 });
@@ -116,7 +114,7 @@
                 async function startMedia() {
                     var constraints = {video: true, audio: false};
                     localStream = await navigator.mediaDevices.getUserMedia(constraints)
-		    localVideo.srcObject = localStream;
+		            localVideo.srcObject = localStream;
                     console.log('Getting user media with constraints', constraints);
                 }
                 
@@ -138,12 +136,7 @@
                         output.style.width = localVideo.clientWidth +'px';
                         output.style.height = localVideo.clientHeight + 'px';
                     }
-                    if (drawing.width != localVideo.clientWidth) {
-                        drawing.width = localVideo.clientWidth;
-                        drawing.height = localVideo.clientHeight;
-                        drawing.style.width = localVideo.clientWidth +'px';
-                        drawing.style.height = localVideo.clientHeight + 'px';
-                    }
+                   
                     var tmpCanvas = document.getElementById('output');
                     var tmpContext = tmpCanvas.getContext('2d');
                     tmpContext.save();
@@ -180,14 +173,14 @@
             </head>
         <body>
             <div>
-                <canvas id='output' width="640" height="480" style='float:left'></canvas>
-                <canvas id='drawing' width="640" height="480" style='float:left'></canvas>
-	    </div>
+                <canvas id='output' width="1080" height="720" style='float:left'></canvas>
+   
+       </div>
 	    <div>	
                 <canvas id='textOutput' width="1280" height="720"></canvas>
             </div>
             <div>
-                <video id='localVideo' width="640" height="480" playsinline autoplay></video>
+                <video id='localVideo' width="1080" height="720" playsinline autoplay></video>
             </div>
 
         </body>

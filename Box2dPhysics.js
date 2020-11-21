@@ -1,13 +1,13 @@
-var Physics = window.Physics = function(element,elementTwo,elementThree,aContext,myWords,scale) {
+var Physics = window.Physics = function(element,elementThree,aContext,myWords,scale) {
     var gravity = new b2Vec2(0,4.8);
     this.world = new b2World(gravity, true);
     this.element = element;
-    this.elementTwo = elementTwo;
+   // this.elementTwo = elementTwo;
     this.elementThree = elementThree;
     this.myWords = myWords;
     
     this.context = element.getContext("2d");
-    this.contextTwo = elementTwo.getContext("2d");
+   // this.contextTwo = elementTwo.getContext("2d");
     this.contextThree = elementThree.getContext("2d");
     
     this.scale = scale || 30;
@@ -257,9 +257,9 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.activeLine = 1;
             this.setWords();
             this.numberOfHaikus = this.numberOfHaikus + 1;
-            this.contextTwo.clearRect(0,0,this.elementTwo.width,this.elementTwo.height);
-            this.contextTwo.fillStyle = "lightgray";
-            this.contextTwo.fillRect(0,0,this.elementTwo.width,this.elementTwo.height);
+            //this.contextTwo.clearRect(0,0,this.elementTwo.width,this.elementTwo.height);
+            //this.contextTwo.fillStyle = "lightgray";
+            //this.contextTwo.fillRect(0,0,this.elementTwo.width,this.elementTwo.height);
             if(this.numberOfHaikus % 5 == 0) {
                 this.textPosX = this.textPosX + 426.666;
                 this.textPosY = 0.0;
