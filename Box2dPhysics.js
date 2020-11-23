@@ -44,6 +44,7 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
     this.playing = false;
     this.amplitude = 0.1;
     this.audioContext = aContext;
+    this.badTone = false;
     this.setWords();
    
 };
@@ -570,7 +571,8 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             if(!isNaN(xNorm) && !isNaN(yNorm)) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
-                body.PlayTone(body);
+                body.PlayTone(body,this.badTone);
+                this.badTone = false;
                 hit = true;
             }
         }
@@ -578,6 +580,24 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
     return hit;
 };
 
+Physics.prototype.isAGoodLine() {
+    switch (this.activeLine) {
+        case 1 :
+            if(this.sylsLeftInLineOne < 0) {
+                this.badTone = true;
+            }
+        case 2 :
+            if(this.sylsLeftInLineTwo < 0) {
+                this.badTone = true;
+            }
+        case 3 :
+            if(this.sylsLeftInLineThree < 0) {
+                this.badTone = true;
+            }
+        default:
+            break;
+    }
+}
 Physics.prototype.isIn = function(x,y,body) {
     
     var xDiff  = x - body.body.GetWorldCenter().x*2;

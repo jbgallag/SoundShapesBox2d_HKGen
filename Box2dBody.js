@@ -212,13 +212,13 @@ Body.prototype.setTextColor = function (context,vel) {
     }
 }
 
-Body.prototype.PlayTone = function(caller) {
+Body.prototype.PlayTone = function(caller,badTone) {
     if(!this.playing) {
         this.playing = true;
         this.player = caller;
         //this.aSineWave = new SineWave(physics.audioContext);
         // this.setToneByYLocation();
-        this.aSineWave.setFrequency(this.GetFreq());
+        this.aSineWave.setFrequency(this.GetFreq(badTone));
         //this.aSineWave.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
         this.aSineWave.setAmplitude(this.amplitude);
         //   for (var i = 0; i < this.connections.length; i++) {
@@ -237,11 +237,16 @@ Body.prototype.PauseTone = function (caller) {
     }
 }
 
-Body.prototype.GetFreq = function() {
-    var halfSteps = [0,4,5,7,11,12];
-    var halfStepsTwo = [0,2,6,7,9,11];
+Body.prototype.GetFreq = function(badTone) {
+    var halfSteps = [0,4,5,7,9,12];
+    var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
-    if(this.details.wordType == "noun" || this.details.wordType == "verb") {
+    if(badTone) {
+        freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
+    } else {
+        freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
+    }
+   /* if(this.details.wordType == "noun" || this.details.wordType == "verb") {
         if(Math.random() > 0.5) {
             freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
         } else {
@@ -254,6 +259,6 @@ Body.prototype.GetFreq = function() {
             } else {
                 freq = this.details.tone / Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
             }
-        }
+        }*/
     return freq;
 }
