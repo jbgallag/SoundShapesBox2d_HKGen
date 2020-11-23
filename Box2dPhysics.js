@@ -152,13 +152,13 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
         var body = obj.GetUserData();
         if (body) {
             if(body.details.wordType == "verb")
-                body.draw(ctx,this.myVerb);
+                body.draw(ctx,this.myVerb,this.NumVerbSyl);
             if(body.details.wordType == "noun")
-                body.draw(ctx,this.myNoun);
+                body.draw(ctx,this.myNoun,this.NumNounSyl);
             if(body.details.wordType == "adj")
-                body.draw(ctx,this.myAdj);
+                body.draw(ctx,this.myAdj,this.NumAdjectiveSyl);
             if(body.details.wordType == "adv")
-                body.draw(ctx,this.myAdv);
+                body.draw(ctx,this.myAdv,this.NumAdverbSyl);
            // if(body.details.wordType == "pro")
              //   body.draw(ctx,this.myPro);
             //if(body.details.wordType == "pre")

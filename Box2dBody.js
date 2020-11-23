@@ -76,7 +76,7 @@ bullet: false,
 fixedRotation: false
 };
 
-Body.prototype.draw = function (context,text) {
+Body.prototype.draw = function (context,text,numSyl) {
     var tidx = 0;
     var pos = this.body.GetPosition(),
     angle = this.body.GetAngle();
@@ -112,6 +112,8 @@ Body.prototype.draw = function (context,text) {
                 context.lineWidth = 3;
                 context.strokeText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
                 context.fillText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
+                context.strokeText(numSyl, this.details.radius/2, this.details.radius/2);
+                context.fillText(numSyl, this.details.radius/2, this.details.radius/2);
                 context.closePath();
                 break;
             case "polygon":
