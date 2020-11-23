@@ -167,7 +167,7 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
             wasHit = false;
             wasHit = this.HitCenterOfMass(imgData,oldData,body);
             if(wasHit && body.details.impulseActive) {
-                this.RenderText(ctx2,body.details.wordType);
+                this.RenderText(ctx2,body);
             }
 
             
@@ -199,7 +199,7 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
     ctx.restore();
 }*/
 
-Physics.prototype.RenderText = function(ctx,wtype) {
+Physics.prototype.RenderText = function(ctx,body) {
     ctx.save();
     ctx.fillStyle = "black";
     var fontSize = 18;
@@ -226,7 +226,11 @@ Physics.prototype.RenderText = function(ctx,wtype) {
     
     ctx.fillText(this.myText, this.textPosX, this.textPosY);
     if(this.activeLine == 1) {
-      //  this.SetSylLeftLineOne(wtype);
+        this.SetSylLeftLineOne(body.details.wordType);
+        this.isAGoodLine(body.details.wordType);
+        console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
+        body.PlayTone(body,this.badTone);
+        this.badTone = false;
         if(this.sylsLeftInLineOne > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineOne);
         if(this.sylsLeftInLineOne <= 0) {
@@ -237,7 +241,11 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.setWords();
         }
     } else if(this.activeLine == 2) {
-        //this.SetSylLeftLineTwo(wtype);
+        this.SetSylLeftLineTwo(body.details.wordType);
+        this.isAGoodLine(body.details.wordType);
+        console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
+        body.PlayTone(body,this.badTone);
+        this.badTone = false;
         if(this.sylsLeftInLineTwo > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
         if(this.sylsLeftInLineTwo <= 0) {
@@ -248,7 +256,11 @@ Physics.prototype.RenderText = function(ctx,wtype) {
             this.setWords();
         }
     } else if(this.activeLine == 3) {
-        //this.SetSylLeftLineThree(wtype);
+        this.SetSylLeftLineThree(body.details.wordType);
+        this.isAGoodLine(body.details.wordType);
+        console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
+        body.PlayTone(body,this.badTone);
+        this.badTone = false;
         if(this.sylsLeftInLineThree > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineThree);
         if(this.sylsLeftInLineThree <= 0) {
@@ -571,10 +583,6 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             if(!isNaN(xNorm) && !isNaN(yNorm)) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
-                this.isAGoodLine(body.details.wordType);
-                console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
-                body.PlayTone(body,this.badTone);
-                this.badTone = false;
                 hit = true;
             }
         }
@@ -585,18 +593,14 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
 Physics.prototype.isAGoodLine = function(wtype) {
     switch (this.activeLine) {
         case 1 :
-            this.SetSylLeftLineOne(wtype);
-            console.log("WTYPE: ",wtype,this.sylsLeftInLineOne);
             if(this.sylsLeftInLineOne < 0) {
                 this.badTone = true;
             }
         case 2 :
-            this.SetSylLeftLineTwo(wtype);
             if(this.sylsLeftInLineTwo < 0) {
                 this.badTone = true;
             }
         case 3 :
-            this.SetSylLeftLineThree(wtype);
             if(this.sylsLeftInLineThree < 0) {
                 this.badTone = true;
             }
