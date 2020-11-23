@@ -232,6 +232,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
         if(this.sylsLeftInLineOne <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
+            this.isAGoodLine()
             this.sylsLeftInLineOne = 5;
             this.activeLine = this.activeLine + 1;
             this.setWords();
@@ -243,6 +244,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
         if(this.sylsLeftInLineTwo <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
+            this.isAGoodLine()
             this.sylsLeftInLineTwo = 7;
             this.activeLine = this.activeLine + 1;
             this.setWords();
@@ -254,6 +256,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
         if(this.sylsLeftInLineThree <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + (fontSize*3);
+            this.isAGoodLine()
             this.sylsLeftInLineThree = 5;
             this.activeLine = 1;
             this.setWords();
@@ -571,7 +574,6 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             if(!isNaN(xNorm) && !isNaN(yNorm)) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
-                this.isAGoodLine();
                 console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
                 body.PlayTone(body,this.badTone);
                 this.badTone = false;
