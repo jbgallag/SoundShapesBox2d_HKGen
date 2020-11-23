@@ -246,6 +246,7 @@ Body.prototype.GetFreq = function(badTone) {
         freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
     } else {
         freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
+        console.log("Bad Tone: ",freq);
     }
    /* if(this.details.wordType == "noun" || this.details.wordType == "verb") {
         if(Math.random() > 0.5) {
