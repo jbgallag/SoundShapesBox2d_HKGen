@@ -112,8 +112,9 @@ Body.prototype.draw = function (context,text,numSyl) {
                 context.lineWidth = 3;
                 context.strokeText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
                 context.fillText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
-                context.strokeText(numSyl, this.details.radius/2, this.details.radius/2);
-                context.fillText(numSyl, this.details.radius/2, this.details.radius/2);
+                context.strokeText(numSyl, this.details.radius, this.details.radius);
+                context.fillStyle = "black";
+                context.fillText(numSyl, this.details.radius, this.details.radius);
                 context.closePath();
                 break;
             case "polygon":
