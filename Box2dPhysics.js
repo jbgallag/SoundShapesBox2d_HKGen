@@ -597,7 +597,8 @@ Physics.prototype.isAGoodLine() {
         default:
             break;
     }
-}
+};
+
 Physics.prototype.isIn = function(x,y,body) {
     
     var xDiff  = x - body.body.GetWorldCenter().x*2;
