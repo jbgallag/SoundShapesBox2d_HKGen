@@ -10,6 +10,7 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
    // this.contextTwo = elementTwo.getContext("2d");
     this.contextThree = elementThree.getContext("2d");
     
+
     this.scale = scale || 30;
     this.dtRemaining = 0;
     this.stepAmount = 1/60;
@@ -46,6 +47,9 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
     this.audioContext = aContext;
     this.badTone = false;
     this.setWords();
+
+    this.lastResetTime = 0.0;
+    this.resetFreq = 50.0;
    
 };
 
@@ -137,8 +141,13 @@ Physics.prototype.step = function (dt,imgData,oldData) {
         this.world.Step(this.stepAmount,
                         8, // velocity iterations
                         3); // position iterations
+        this.lastResetTime += 1;
     }
     this.RenderWorld(imgData,oldData,this.context,this.contextThree);
+    if(this.lastResetTime == this.resetFreq) {
+        this.ResetBodiesNotHit();
+        this.lastResetTime = 0;
+    }
     //this.RenderWorldTwo(this.contextTwo);
    }
 
@@ -233,8 +242,8 @@ Physics.prototype.RenderText = function(ctx,body) {
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
         this.badTone = false;
-        if(this.sylsLeftInLineOne > 0)
-            this.ResetBodiesNotHit(this.sylsLeftInLineOne);
+        //if(this.sylsLeftInLineOne > 0)
+         //   this.ResetBodiesNotHit(this.sylsLeftInLineOne);
         if(this.sylsLeftInLineOne <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
@@ -252,8 +261,8 @@ Physics.prototype.RenderText = function(ctx,body) {
 
         this.badTone = false;
 
-        if(this.sylsLeftInLineTwo > 0)
-            this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
+        //if(this.sylsLeftInLineTwo > 0)
+          //  this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
         if(this.sylsLeftInLineTwo <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
@@ -270,8 +279,8 @@ Physics.prototype.RenderText = function(ctx,body) {
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
         this.badTone = false;
-        if(this.sylsLeftInLineThree > 0)
-            this.ResetBodiesNotHit(this.sylsLeftInLineThree);
+        //if(this.sylsLeftInLineThree > 0)
+          //  this.ResetBodiesNotHit(this.sylsLeftInLineThree);
         if(this.sylsLeftInLineThree <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + (fontSize*3);
@@ -354,7 +363,7 @@ Physics.prototype.SetSylLeftLineThree = function(wtype) {
     }
 }
 
-Physics.prototype.ResetBodiesNotHit = function(sylLeft) {
+Physics.prototype.ResetBodiesNotHit = function() {
     var obj = this.world.GetBodyList();
    
     while (obj) {
