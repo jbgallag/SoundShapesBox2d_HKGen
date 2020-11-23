@@ -581,7 +581,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
     return hit;
 };
 
-Physics.prototype.isAGoodLine() = function() {
+Physics.prototype.isAGoodLine = function() {
     switch (this.activeLine) {
         case 1 :
             if(this.sylsLeftInLineOne < 0) {
