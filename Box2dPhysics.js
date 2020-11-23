@@ -585,17 +585,17 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
 Physics.prototype.isAGoodLine = function(wtype) {
     switch (this.activeLine) {
         case 1 :
-            SetSylLeftLineOne(wtype);
+            this.SetSylLeftLineOne(wtype);
             if(this.sylsLeftInLineOne < 0) {
                 this.badTone = true;
             }
         case 2 :
-            SetSylLeftLineTwo(wtype);
+            this.SetSylLeftLineTwo(wtype);
             if(this.sylsLeftInLineTwo < 0) {
                 this.badTone = true;
             }
         case 3 :
-            SetSylLeftLineThree(wtype);
+            this.SetSylLeftLineThree(wtype);
             if(this.sylsLeftInLineThree < 0) {
                 this.badTone = true;
             }
