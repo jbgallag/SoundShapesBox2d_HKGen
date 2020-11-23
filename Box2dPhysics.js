@@ -572,7 +572,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
                 this.isAGoodLine();
-                console.log("BAD TONE: ",badTone)
+                console.log("BAD TONE: ",this.badTone)
                 body.PlayTone(body,this.badTone);
                 this.badTone = false;
                 hit = true;
