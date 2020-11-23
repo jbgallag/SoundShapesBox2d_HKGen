@@ -113,7 +113,7 @@ Body.prototype.draw = function (context,text,numSyl) {
                 context.strokeText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
                 context.fillText(text, 20-(this.details.radius)/4 ,20-(this.details.radius)/2);
                 context.fillStyle = "black";
-                context.fillText(numSyl, 0, 0);
+                context.fillText(numSyl, -this.details.radius/4, -this.details.radius/4);
                 context.closePath();
                 break;
             case "polygon":
