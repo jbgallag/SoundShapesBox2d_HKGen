@@ -586,6 +586,7 @@ Physics.prototype.isAGoodLine = function(wtype) {
     switch (this.activeLine) {
         case 1 :
             this.SetSylLeftLineOne(wtype);
+            console.log("WTYPE: ",wtype,this.sylsLeftInLineOne);
             if(this.sylsLeftInLineOne < 0) {
                 this.badTone = true;
             }
