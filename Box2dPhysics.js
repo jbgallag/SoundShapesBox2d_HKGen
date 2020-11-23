@@ -226,37 +226,34 @@ Physics.prototype.RenderText = function(ctx,wtype) {
     
     ctx.fillText(this.myText, this.textPosX, this.textPosY);
     if(this.activeLine == 1) {
-        this.SetSylLeftLineOne(wtype);
+      //  this.SetSylLeftLineOne(wtype);
         if(this.sylsLeftInLineOne > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineOne);
         if(this.sylsLeftInLineOne <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
-            this.isAGoodLine()
             this.sylsLeftInLineOne = 5;
             this.activeLine = this.activeLine + 1;
             this.setWords();
         }
     } else if(this.activeLine == 2) {
-        this.SetSylLeftLineTwo(wtype);
+        //this.SetSylLeftLineTwo(wtype);
         if(this.sylsLeftInLineTwo > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
         if(this.sylsLeftInLineTwo <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
-            this.isAGoodLine()
             this.sylsLeftInLineTwo = 7;
             this.activeLine = this.activeLine + 1;
             this.setWords();
         }
     } else if(this.activeLine == 3) {
-        this.SetSylLeftLineThree(wtype);
+        //this.SetSylLeftLineThree(wtype);
         if(this.sylsLeftInLineThree > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineThree);
         if(this.sylsLeftInLineThree <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + (fontSize*3);
-            this.isAGoodLine()
             this.sylsLeftInLineThree = 5;
             this.activeLine = 1;
             this.setWords();
@@ -574,6 +571,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             if(!isNaN(xNorm) && !isNaN(yNorm)) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
+                this.isAGoodLine(body.details.wtype);
                 console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
                 body.PlayTone(body,this.badTone);
                 this.badTone = false;
@@ -584,17 +582,20 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
     return hit;
 };
 
-Physics.prototype.isAGoodLine = function() {
+Physics.prototype.isAGoodLine = function(wtype) {
     switch (this.activeLine) {
         case 1 :
+            SetSylLeftLineOne(wtype);
             if(this.sylsLeftInLineOne < 0) {
                 this.badTone = true;
             }
         case 2 :
+            SetSylLeftLineTwo(wtype);
             if(this.sylsLeftInLineTwo < 0) {
                 this.badTone = true;
             }
         case 3 :
+            SetSylLeftLineThree(wtype);
             if(this.sylsLeftInLineThree < 0) {
                 this.badTone = true;
             }
