@@ -242,7 +242,7 @@ Body.prototype.GetFreq = function(badTone) {
     var halfStepsTwo = [0,2,8,11];
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
-    if(badTone) {
+    if(!badTone) {
         freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
     } else {
         freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
