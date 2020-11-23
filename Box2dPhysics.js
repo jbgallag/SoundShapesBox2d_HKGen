@@ -201,7 +201,7 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
 
 Physics.prototype.RenderText = function(ctx,body) {
     ctx.save();
-    ctx.fillStyle = "black";
+    ctx.fillStyle = "blue";
     var fontSize = 18;
     var font = fontSize +"px courier";
     ctx.font = font;
@@ -224,11 +224,14 @@ Physics.prototype.RenderText = function(ctx,body) {
     this.myText = this.myText + text;
     
     
-    ctx.fillText(this.myText, this.textPosX, this.textPosY);
     if(this.activeLine == 1) {
         this.SetSylLeftLineOne(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
         body.PlayTone(body,this.badTone);
+        if(this.badTone)
+            ctx.fillStyle = "red";
+        ctx.fillText(this.myText, this.textPosX, this.textPosY);
+
         this.badTone = false;
         if(this.sylsLeftInLineOne > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineOne);
@@ -243,7 +246,12 @@ Physics.prototype.RenderText = function(ctx,body) {
         this.SetSylLeftLineTwo(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
         body.PlayTone(body,this.badTone);
+         if(this.badTone)
+            ctx.fillStyle = "red";
+        ctx.fillText(this.myText, this.textPosX, this.textPosY);
+
         this.badTone = false;
+
         if(this.sylsLeftInLineTwo > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
         if(this.sylsLeftInLineTwo <= 0) {
@@ -257,6 +265,10 @@ Physics.prototype.RenderText = function(ctx,body) {
         this.SetSylLeftLineThree(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
         body.PlayTone(body,this.badTone);
+         if(this.badTone)
+            ctx.fillStyle = "red";
+        ctx.fillText(this.myText, this.textPosX, this.textPosY);
+
         this.badTone = false;
         if(this.sylsLeftInLineThree > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineThree);
