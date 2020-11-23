@@ -571,7 +571,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             if(!isNaN(xNorm) && !isNaN(yNorm)) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
-                this.isAGoodLine(body.details.wtype);
+                this.isAGoodLine(body.details.wordType);
                 console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
                 body.PlayTone(body,this.badTone);
                 this.badTone = false;
