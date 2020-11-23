@@ -207,13 +207,13 @@ Physics.prototype.RenderText = function(ctx,body) {
     ctx.font = font;
     ctx.textBaseline = "top";
     var text = "";
-    if(wtype == "noun")
+    if(body.details.wordType == "noun")
         text = this.myNoun + " ";
-    if(wtype == "verb")
+    if(body.details.wordType == "verb")
         text = this.myVerb + " ";
-    if(wtype == "adj")
+    if(body.details.wordType == "adj")
         text = this.myAdj  + " ";
-    if(wtype == "adv")
+    if(body.details.wordType == "adv")
         text = this.myAdv  + " ";
     //if(wtype == "pro")
     //    text = this.myPro  + " ";
