@@ -339,7 +339,8 @@ Physics.prototype.ResetBodiesNotHit = function(sylLeft) {
         
         var body = obj.GetUserData();
         if (body) {
-            this.SetWordSylLeft(body,sylLeft);
+            this.setWords();
+            //this.SetWordSylLeft(body,sylLeft);
         }
         obj = obj.GetNext();
     }
