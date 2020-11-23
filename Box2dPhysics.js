@@ -228,7 +228,6 @@ Physics.prototype.RenderText = function(ctx,body) {
     if(this.activeLine == 1) {
         this.SetSylLeftLineOne(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
-        console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
         body.PlayTone(body,this.badTone);
         this.badTone = false;
         if(this.sylsLeftInLineOne > 0)
@@ -243,7 +242,6 @@ Physics.prototype.RenderText = function(ctx,body) {
     } else if(this.activeLine == 2) {
         this.SetSylLeftLineTwo(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
-        console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
         body.PlayTone(body,this.badTone);
         this.badTone = false;
         if(this.sylsLeftInLineTwo > 0)
@@ -258,7 +256,6 @@ Physics.prototype.RenderText = function(ctx,body) {
     } else if(this.activeLine == 3) {
         this.SetSylLeftLineThree(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
-        console.log("BAD TONE: ",this.sylsLeftInLineOne,this.badTone)
         body.PlayTone(body,this.badTone);
         this.badTone = false;
         if(this.sylsLeftInLineThree > 0)
