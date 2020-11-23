@@ -71,10 +71,10 @@
                         physics = window.physics = new Physics(output,textOutput,aContext,myWords,2);
                         
                         // Create some walls
-                        new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 10,  width: 1080 });
-                        new Body(physics, { color: "red", type: "static", x: 0, y: 360, height: 10,  width: 1080});
-                        new Body(physics, { color: "red", type: "static", x: 0, y: 11, height: 720, width: 10 });
-                        new Body(physics, { color: "red", type: "static", x: 540, y:11, height: 720, width: 10 });
+                        new Body(physics, { color: "red", type: "static", x: 0, y: 0, height: 10,  width: 960 });
+                        new Body(physics, { color: "red", type: "static", x: 0, y: 270, height: 10,  width: 960});
+                        new Body(physics, { color: "red", type: "static", x: 0, y: 11, height: 540, width: 10 });
+                        new Body(physics, { color: "red", type: "static", x: 480, y:11, height: 540, width: 10 });
                         
                         //  new Body(physics, { image: img, x: 5, y: 8 });
                        // new Body(physics, { image: img, width: 150, height: 30, impulseActive: false, x: 13, y: 8 });
@@ -173,14 +173,14 @@
             </head>
         <body>
             <div>
-                <canvas id='output' width="1080" height="720" style='float:left'></canvas>
+                <canvas id='output' width="960" height="540" style='float:left'></canvas>
    
        </div>
 	    <div>	
-                <canvas id='textOutput' width="1280" height="720"></canvas>
+                <canvas id='textOutput' width="960" height="1080" style='float:right'></canvas>
             </div>
             <div>
-                <video id='localVideo' width="1080" height="720" hidden playsinline autoplay></video>
+                <video id='localVideo' width="960" height="540" playsinline autoplay></video>
             </div>
 
         </body>
