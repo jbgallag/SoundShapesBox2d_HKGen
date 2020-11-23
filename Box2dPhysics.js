@@ -228,7 +228,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
         this.SetSylLeftLineOne(wtype);
         if(this.sylsLeftInLineOne > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineOne);
-        if(this.sylsLeftInLineOne == 0) {
+        if(this.sylsLeftInLineOne <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
             this.sylsLeftInLineOne = 5;
@@ -239,7 +239,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
         this.SetSylLeftLineTwo(wtype);
         if(this.sylsLeftInLineTwo > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineTwo);
-        if(this.sylsLeftInLineTwo == 0) {
+        if(this.sylsLeftInLineTwo <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
             this.sylsLeftInLineTwo = 7;
@@ -250,7 +250,7 @@ Physics.prototype.RenderText = function(ctx,wtype) {
         this.SetSylLeftLineThree(wtype);
         if(this.sylsLeftInLineThree > 0)
             this.ResetBodiesNotHit(this.sylsLeftInLineThree);
-        if(this.sylsLeftInLineThree == 0) {
+        if(this.sylsLeftInLineThree <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + (fontSize*3);
             this.sylsLeftInLineThree = 5;
