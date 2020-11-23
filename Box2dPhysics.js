@@ -494,7 +494,7 @@ Physics.prototype.HitTest = function(imgData,oldData,body) {
     var xEnd  = Math.round(body.body.GetWorldCenter().x*2 + body.details.width);
     for(var i=yStart; i<yEnd; i++) {
         for(var j=xStart; j<xEnd; j++) {
-            var idx = (j + (i * 1080))*4;
+            var idx = (j + (i * 540))*4;
             if (this.isIn(j,i,body)) {
                 
                 sum += ((imgData.data[idx]-oldData.data[idx])*(imgData.data[idx]-oldData.data[idx]));
