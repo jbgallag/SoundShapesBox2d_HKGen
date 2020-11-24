@@ -238,8 +238,8 @@ Body.prototype.PauseTone = function (caller) {
 }
 
 Body.prototype.GetFreq = function(badTone) {
-    var halfSteps = [0,4,7,9,11];
-    var halfStepsTwo = [1,3,6,9,10];
+    var halfSteps = [0,2,4,7,9];
+    var halfStepsTwo = [0,1,3,6,11];
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
     if(!badTone) {
