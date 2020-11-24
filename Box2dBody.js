@@ -245,13 +245,13 @@ Body.prototype.GetFreq = function(badTone) {
     if(!badTone) {
         idx = Math.floor(Math.random()*halfSteps.length);
         freq = this.details.tone * Math.pow(1.059463094359,halfSteps[idx]);
-        halfSteps.splice(idx,1);
+        halfSteps = halfSteps.splice(idx,1);
         if(halfSteps.length == 0)
             halfSteps = [0,2,4,7,9];
     } else {
         idx = Math.floor(Math.random()*halfStepsTwo.length);
         freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[idx]);
-        halfStepsTwo.splice(idx,1);
+        halfStepsTwo = halfStepsTwo.splice(idx,1);
         if(halfStepsTwo.length == 0)
             halfStepsTwo = [1,3,6,11,15];
     }
