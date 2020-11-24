@@ -242,8 +242,8 @@ Physics.prototype.RenderText = function(ctx,body) {
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
         this.badTone = false;
-        //if(this.sylsLeftInLineOne > 0)
-         //   this.ResetBodiesNotHit();
+        if(this.sylsLeftInLineOne > 0)
+            this.ResetBodiesNotHit();
         if(this.sylsLeftInLineOne <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
@@ -261,8 +261,8 @@ Physics.prototype.RenderText = function(ctx,body) {
 
         this.badTone = false;
 
-        //if(this.sylsLeftInLineTwo > 0)
-        //    this.ResetBodiesNotHit();
+        if(this.sylsLeftInLineTwo > 0)
+            this.ResetBodiesNotHit();
         if(this.sylsLeftInLineTwo <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
@@ -279,8 +279,8 @@ Physics.prototype.RenderText = function(ctx,body) {
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
         this.badTone = false;
-        //if(this.sylsLeftInLineThree > 0)
-        //    this.ResetBodiesNotHit();
+        if(this.sylsLeftInLineThree > 0)
+            this.ResetBodiesNotHit();
         if(this.sylsLeftInLineThree <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + (fontSize*3);
