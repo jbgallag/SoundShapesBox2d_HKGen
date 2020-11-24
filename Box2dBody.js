@@ -243,10 +243,17 @@ Body.prototype.GetFreq = function(badTone) {
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
     if(!badTone) {
-        freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
+        idx = Math.floor(Math.random()*halfSteps.length);
+        freq = this.details.tone * Math.pow(1.059463094359,halfSteps[idx]);
+        halfSteps.splice(idx,1);
+        if(halfSteps.length == 0)
+            halfSteps = [0,2,4,7,9];
     } else {
-        freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[Math.floor(Math.random()*halfStepsTwo.length)]);
-        console.log("Bad Tone: ",freq);
+        idx = Math.floor(Math.random()*halfStepsTwo.length);
+        freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[idx]);
+        halfStepsTwo.splie(idx,1);
+        if(halfStepsTwo.length == 0)
+            halfStepsTwo = [1,3,6,11,14];
     }
    /* if(this.details.wordType == "noun" || this.details.wordType == "verb") {
         if(Math.random() > 0.5) {
