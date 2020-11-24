@@ -248,14 +248,13 @@ Body.prototype.GetFreq = function(badTone) {
     if(!badTone) {
         idx = Math.floor(Math.random()*this.halfSteps.length);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
-        this.halfSteps = this.halfSteps.splice(idx,1);
-        console.log("HS: ",this.halfSteps);
+        this.halfSteps = this.halfSteps.slice(idx,1);
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
         idx = Math.floor(Math.random()*this.halfStepsTwo.length);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
-        this.halfStepsTwo = this.halfStepsTwo.splice(idx,1);
+        this.halfStepsTwo = this.halfStepsTwo.slice(idx,1);
         if(this.halfStepsTwo.length == 0)
             this.halfStepsTwo = [1,3,6,11,15];
     }
