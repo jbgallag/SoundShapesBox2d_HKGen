@@ -144,10 +144,10 @@ Physics.prototype.step = function (dt,imgData,oldData) {
         this.lastResetTime += 1;
     }
     this.RenderWorld(imgData,oldData,this.context,this.contextThree);
-    if(this.lastResetTime >= this.resetFreq) {
-        this.ResetBodiesNotHit();
-        this.lastResetTime = 0;
-    }
+    //if(this.lastResetTime >= this.resetFreq) {
+    //    this.ResetBodiesNotHit();
+    //    this.lastResetTime = 0;
+    //}
     //this.RenderWorldTwo(this.contextTwo);
    }
 
@@ -584,7 +584,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             }
         }
       //  console.log("massSumX: ",massSumX);
-        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 5000) {
+        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 10000) {
             xCenter = densSumX/massSumX;
             yCenter = densSumY/massSumY;
         
