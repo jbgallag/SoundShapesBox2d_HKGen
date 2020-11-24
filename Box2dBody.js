@@ -253,7 +253,7 @@ Body.prototype.GetFreq = function(badTone) {
         freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[idx]);
         halfStepsTwo.splice(idx,1);
         if(halfStepsTwo.length == 0)
-            halfStepsTwo = [1,3,6,11,14];
+            halfStepsTwo = [1,3,6,11,15];
     }
    /* if(this.details.wordType == "noun" || this.details.wordType == "verb") {
         if(Math.random() > 0.5) {
