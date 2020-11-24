@@ -251,7 +251,7 @@ Body.prototype.GetFreq = function(badTone) {
     } else {
         idx = Math.floor(Math.random()*halfStepsTwo.length);
         freq = this.details.tone * Math.pow(1.059463094359,halfStepsTwo[idx]);
-        halfStepsTwo.splie(idx,1);
+        halfStepsTwo.splice(idx,1);
         if(halfStepsTwo.length == 0)
             halfStepsTwo = [1,3,6,11,14];
     }
