@@ -248,6 +248,7 @@ Body.prototype.getRandomInt = function(min, max) {
 
 Body.prototype.makeNewHalfSteps = function(bidx) {
     c=0;
+    newList = []
     for(i=0; i<this.halfSteps.length; i++) {
         if(i != bidx) {
             newList[c] = this.halfSteps;
@@ -259,6 +260,7 @@ Body.prototype.makeNewHalfSteps = function(bidx) {
 
 Body.prototype.makeNewHalfStepsTwo = function(bidx) {
     c=0;
+    newList = []
     for(i=0; i<this.makeNewHalfStepsTwo.length; i++) {
         if(i != bidx) {
             newList[c] = this.halfStepsTwo;
