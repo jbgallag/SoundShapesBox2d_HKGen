@@ -240,19 +240,25 @@ Body.prototype.PauseTone = function (caller) {
     }
 }
 
+Physics.prototype.getRandomInt = function(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 Body.prototype.GetFreq = function(badTone) {
     //var halfSteps = [0,2,4,7,9];
     //var halfStepsTwo = [1,3,6,11,15];
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
     if(!badTone) {
-        idx = Math.floor(Math.random()*this.halfSteps.length);
+        idx = getRandomInt(0,this.halfSteps.length-1)
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
         this.halfSteps = this.halfSteps[idx:1]
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
-        idx = Math.floor(Math.random()*this.halfStepsTwo.length);
+        idx = getRandomInt(0,this.halfStepsTwo.length-1)
         freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
         this.halfStepsTwo = this.halfStepsTwo[idx:1]
         if(this.halfStepsTwo.length == 0)
