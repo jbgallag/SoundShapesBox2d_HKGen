@@ -1,5 +1,6 @@
 var Body = window.Body = function (physics, details) {
     this.details = details;
+    this.physics = physics;
        
     this.aSineWave = new SineWave(physics.audioContext);
     // Create the definition
@@ -51,10 +52,6 @@ var Body = window.Body = function (physics, details) {
     this.playing = false;
     this.amplitude = 0.1;
 
-    this.halfSteps = details.hone;
-    this.halfStepsTwo = details.htwo;
-
-    this.count = 0;
 };
 
 
@@ -248,30 +245,7 @@ Body.prototype.getRandomInt = function(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
-Body.prototype.makeNewHalfSteps = function(bidx) {
-    c=0;
-    newList = []
-    for(i=0; i<this.halfSteps.length; i++) {
-        if(i != bidx) {
-            newList[c] = this.halfSteps[i];
-            c++;
-        }
-    }
 
-    this.halfSteps = newList;
-}
-
-Body.prototype.makeNewHalfStepsTwo = function(bidx) {
-    c=0;
-    newList = []
-    for(i=0; i<this.makeNewHalfStepsTwo.length; i++) {
-        if(i != bidx) {
-            newList[c] = this.halfStepsTwo[i];
-            c++;
-        }
-    }
-    this.halfStepsTwo = newList;
-}
 
 Body.prototype.GetFreq = function(badTone) {
     //var halfSteps = [0,2,4,7,9];
@@ -279,17 +253,13 @@ Body.prototype.GetFreq = function(badTone) {
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
     if(!badTone) {
-        idx = this.getRandomInt(0,this.details.hone.length-1);
-        freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
-        this.makeNewHalfSteps(idx);
-        if(this.halfSteps.length == 0)
-            this.halfSteps = [0,2,4,7,9,12,14,19,24];
+        idx = this.getRandomInt(0,this.physics.halfSteps.length-1);
+        freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfSteps[idx]);
+        this.physics.makeNewHalfSteps(idx);
     } else {
-        idx = this.getRandomInt(0,this.halfStepsTwo.length-1);
-        freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
-        this.makeNewHalfStepsTwo(idx);
-        if(this.halfStepsTwo.length == 0)
-            this.halfStepsTwo = [1,3,6,11,15];
+        idx = this.getRandomInt(0,this.physics.halfStepsTwo.length-1);
+        freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfStepsTwo[idx]);
+        this.physics.makeNewHalfStepsTwo(idx);
     }
    /* if(this.details.wordType == "noun" || this.details.wordType == "verb") {
         if(Math.random() > 0.5) {

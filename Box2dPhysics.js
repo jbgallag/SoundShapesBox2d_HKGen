@@ -50,8 +50,43 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
 
     this.lastResetTime = 0;
     this.resetFreq = 50;
+
+    this.halfSteps = [0,2,4,7,9];
+    this.halfStepsTwo = [1,3,6,11,15];
    
 };
+
+Physics.prototype.makeNewHalfSteps = function(bidx) {
+    c=0;
+    newList = []
+    for(i=0; i<this.halfSteps.length; i++) {
+        if(i != bidx) {
+            newList[c] = this.halfSteps[i];
+            c++;
+        }
+    }
+    if(newList.length != 0) {
+        this.halfSteps = newList;
+    } else {
+        this.halfSteps = [0,2,4,7,9];
+    }
+}
+
+Physics.prototype.makeNewHalfStepsTwo = function(bidx) {
+    c=0;
+    newList = []
+    for(i=0; i<this.makeNewHalfStepsTwo.length; i++) {
+        if(i != bidx) {
+            newList[c] = this.halfStepsTwo[i];
+            c++;
+        }
+    }
+    if(newList.length != 0) {
+        this.halfStepsTwo = newList;
+    } else {
+        this.halfStepsTwo = [1,3,6,11,15];
+    }
+}
 
 Physics.prototype.setWords = function() {
     this.NumNounSyl = this.getRandomInt(1,4);
@@ -584,7 +619,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             }
         }
       //  console.log("massSumX: ",massSumX);
-        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 7500) {
+        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 4500) {
             xCenter = densSumX/massSumX;
             yCenter = densSumY/massSumY;
         
