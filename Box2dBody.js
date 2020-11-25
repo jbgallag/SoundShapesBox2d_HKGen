@@ -246,6 +246,28 @@ Body.prototype.getRandomInt = function(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
 
+Body.prototype.makeNewHalfSteps = function(bidx) {
+    c=0;
+    for(i=0; i<this.halfSteps.length; i++) {
+        if(i != bidx) {
+            newList[c] = this.halfSteps;
+            c++;
+        }
+    }
+    this.halfSteps = newList;
+}
+
+Body.prototype.makeNewHalfStepsTwo = function(bidx) {
+    c=0;
+    for(i=0; i<this.makeNewHalfStepsTwo.length; i++) {
+        if(i != bidx) {
+            newList[c] = this.halfStepsTwo;
+            c++;
+        }
+    }
+    this.halfStepsTwo = newList;
+}
+
 Body.prototype.GetFreq = function(badTone) {
     //var halfSteps = [0,2,4,7,9];
     //var halfStepsTwo = [1,3,6,11,15];
@@ -254,13 +276,13 @@ Body.prototype.GetFreq = function(badTone) {
     if(!badTone) {
         idx = this.getRandomInt(0,this.halfSteps.length-1);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
-        this.halfSteps.slice(idx,1);
+        this.makeNewHalfSteps(idx);
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
         idx = this.getRandomInt(0,this.halfStepsTwo.length-1);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
-        this.halfStepsTwo.slice(idx,1);
+        this.makeNewHalfStepsTwo(idx);
         if(this.halfStepsTwo.length == 0)
             this.halfStepsTwo = [1,3,6,11,15];
     }
