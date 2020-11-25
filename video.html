@@ -46,6 +46,9 @@
                 var myBrightGreen = "rgba(50,250,100,1.0)";
                 var myYellow = "rgba(200,200,50,0.75)";
                 var myBrightYellow = "rgba(250,250,50,1.0)";
+
+                var halfSteps = [0,2,4,7,9];
+                var halfStepsTwo = [1,3,6,11,15];
                 //var myTeal = "rgba(50,200,200,0.75)";
                 //var myBrightTeal = "rgba(100,200,200,1.0)";
                 //var myOrange = "rgba(100,100,0,0.75)";
@@ -80,10 +83,10 @@
                        // new Body(physics, { image: img, width: 150, height: 30, impulseActive: false, x: 13, y: 8 });
                         //    new Body(physics, { color: "blue", x: 8, y: 3 });
                         //new Body(physics, { color: "gray", shape: "circle", radius: 15, x: 110, y: 25 });
-                        new Body(physics, { color: myRed, shape: "circle", radius: 10, impulseActive: false, wordType: "verb", tone: 320,  colorTwo: myBrightRed, x: 60, y: 25 });
-                        new Body(physics, { color: myBlue, shape: "circle", radius: 10, impulseActive: false, wordType: "noun", tone: 320,  colorTwo: myBrightBlue, x: 120, y: 25 });
-                        new Body(physics, { color: myGreen, shape: "circle", radius: 10, impulseActive: false, wordType: "adj", tone: 320,  colorTwo: myBrightGreen, x: 180, y: 25 });
-                        new Body(physics, { color: myYellow, shape: "circle", radius: 10, impulseActive: false, wordType: "adv", tone: 320,  colorTwo: myBrightYellow, x: 260, y: 25 });
+                        new Body(physics, { color: myRed, shape: "circle", radius: 10, impulseActive: false, wordType: "verb", tone: 320,  colorTwo: myBrightRed, x: 60, y: 25, hone: halfSteps, htwo: halfStepsTwo  });
+                        new Body(physics, { color: myBlue, shape: "circle", radius: 10, impulseActive: false, wordType: "noun", tone: 320,  colorTwo: myBrightBlue, x: 120, y: 25, hone: halfSteps, htwo: halfStepsTwo  });
+                        new Body(physics, { color: myGreen, shape: "circle", radius: 10, impulseActive: false, wordType: "adj", tone: 320,  colorTwo: myBrightGreen, x: 180, y: 25, hone: halfSteps, htwo: halfStepsTwo  });
+                        new Body(physics, { color: myYellow, shape: "circle", radius: 10, impulseActive: false, wordType: "adv", tone: 320,  colorTwo: myBrightYellow, x: 260, y: 25, hone: halfSteps, htwo: halfStepsTwo });
                         //new Body(physics, { color: myTeal, shape: "circle", radius: 10, impulseActive: false, wordType: "pro", resetWord: false,  colorTwo: myBrightTeal, x: 150, y: 25 });
                         //new Body(physics, { color: myOrange, shape: "circle", radius: 10, impulseActive: false, wordType: "pre", resetWord: false,  colorTwo: myBrightOrange, x: 180, y: 25 });
 

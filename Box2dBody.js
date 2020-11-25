@@ -51,8 +51,8 @@ var Body = window.Body = function (physics, details) {
     this.playing = false;
     this.amplitude = 0.1;
 
-    this.halfSteps = [0,2,4,7,9,12,14,19,24];
-    this.halfStepsTwo = [1,3,6,11,15];
+    this.halfSteps = details.hone;
+    this.halfStepsTwo = details.htwo;
 
     this.count = 0;
 };
