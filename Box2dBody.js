@@ -51,7 +51,7 @@ var Body = window.Body = function (physics, details) {
     this.playing = false;
     this.amplitude = 0.1;
 
-    this.halfSteps = [0,2,4,7,9];
+    this.halfSteps = [0,2,4,7,9,12,14,19,24];
     this.halfStepsTwo = [1,3,6,11,15];
 
     this.count = 0;
@@ -280,11 +280,10 @@ Body.prototype.GetFreq = function(badTone) {
     var freq = 0.0;
     if(!badTone) {
         idx = this.getRandomInt(0,this.halfSteps.length-1);
-        freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[this.count]);
-        this.count = this.count + 1;
-        //this.makeNewHalfSteps(idx);
+        freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
+        this.makeNewHalfSteps(idx);
         if(this.halfSteps.length == 0)
-            this.halfSteps = [0,2,4,7,9];
+            this.halfSteps = [0,2,4,7,9,12,14,19,24];
     } else {
         idx = this.getRandomInt(0,this.halfStepsTwo.length-1);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
