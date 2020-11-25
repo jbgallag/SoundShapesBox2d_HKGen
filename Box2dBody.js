@@ -251,7 +251,7 @@ Body.prototype.makeNewHalfSteps = function(bidx) {
     newList = []
     for(i=0; i<this.halfSteps.length; i++) {
         if(i != bidx) {
-            newList[c] = this.halfSteps;
+            newList[c] = this.halfSteps[i];
             c++;
         }
     }
@@ -263,7 +263,7 @@ Body.prototype.makeNewHalfStepsTwo = function(bidx) {
     newList = []
     for(i=0; i<this.makeNewHalfStepsTwo.length; i++) {
         if(i != bidx) {
-            newList[c] = this.halfStepsTwo;
+            newList[c] = this.halfStepsTwo[i];
             c++;
         }
     }
