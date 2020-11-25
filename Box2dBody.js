@@ -240,7 +240,7 @@ Body.prototype.PauseTone = function (caller) {
     }
 }
 
-Physics.prototype.getRandomInt = function(min, max) {
+Body.prototype.getRandomInt = function(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min;
@@ -254,13 +254,13 @@ Body.prototype.GetFreq = function(badTone) {
     if(!badTone) {
         idx = getRandomInt(0,this.halfSteps.length-1);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
-        this.halfSteps = this.halfSteps[idx:1]
+        this.halfSteps = this.halfSteps[idx:1];
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
         idx = getRandomInt(0,this.halfStepsTwo.length-1);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
-        this.halfStepsTwo = this.halfStepsTwo[idx:1]
+        this.halfStepsTwo = this.halfStepsTwo[idx:1];
         if(this.halfStepsTwo.length == 0)
             this.halfStepsTwo = [1,3,6,11,15];
     }
