@@ -254,7 +254,7 @@ Body.prototype.GetFreq = function(badTone) {
     if(!badTone) {
         idx = getRandomInt(0,this.halfSteps.length-1);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
-        this.halfSteps.slice(idx:1);
+        this.halfSteps.slice(idx,1);
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
