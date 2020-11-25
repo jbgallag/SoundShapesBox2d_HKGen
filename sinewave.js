@@ -27,8 +27,8 @@ SineWave = function(context) {
   this.fmosc.start(0);
   this.fmgain = this.context.createGain();
   this.fmgain.gain.value = this.osc.frequency.value * 0.15;
-  this.fmosc.connect(this.fmgain);
-  this.fmgain.connect(this.osc.frequency);
+  //this.fmosc.connect(this.fmgain);
+  //this.fmgain.connect(this.osc.frequency);
 }
 
 SineWave.prototype.setFmFrequency = function(fmFreq) {

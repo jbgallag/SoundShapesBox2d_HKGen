@@ -249,7 +249,6 @@ Body.prototype.GetFreq = function(badTone) {
         idx = Math.floor(Math.random()*this.halfSteps.length);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
         this.halfSteps.slice(idx,1);
-        console.log("HS: ",idx,this.halfSteps);
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
