@@ -85,8 +85,8 @@ Body.prototype.draw = function (context,text,numSyl) {
     angle = this.body.GetAngle();
     var vel = this.body.GetLinearVelocity();
     var angVel = this.body.GetAngularVelocity();
-    //if(angVel != 0.0)
-    //   this.aSineWave.setFmFrequency(Math.abs(angVel)*0.5);
+    if(angVel != 0.0)
+       this.aSineWave.setFmFrequency(Math.abs(angVel)*0.5);
     // Save the context
     context.save();
     
@@ -248,13 +248,13 @@ Body.prototype.GetFreq = function(badTone) {
     if(!badTone) {
         idx = Math.floor(Math.random()*this.halfSteps.length);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfSteps[idx]);
-        this.halfSteps.slice(idx,1);
+        this.halfSteps = this.halfSteps[idx:1]
         if(this.halfSteps.length == 0)
             this.halfSteps = [0,2,4,7,9];
     } else {
         idx = Math.floor(Math.random()*this.halfStepsTwo.length);
         freq = this.details.tone * Math.pow(1.059463094359,this.halfStepsTwo[idx]);
-        this.halfStepsTwo.slice(idx,1);
+        this.halfStepsTwo = this.halfStepsTwo[idx:1]
         if(this.halfStepsTwo.length == 0)
             this.halfStepsTwo = [1,3,6,11,15];
     }

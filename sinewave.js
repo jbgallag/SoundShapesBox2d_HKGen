@@ -22,13 +22,13 @@ SineWave = function(context) {
   this.osc.start(0);
     this.osc2.start(0);
     this.osc3.start(0);
-  /*this.fmosc = this.context.createOscillator();
+  this.fmosc = this.context.createOscillator();
   this.fmosc.frequency.value = 4;
   this.fmosc.start(0);
   this.fmgain = this.context.createGain();
   this.fmgain.gain.value = this.osc.frequency.value * 0.15;
   this.fmosc.connect(this.fmgain);
-  this.fmgain.connect(this.osc.frequency);*/
+  this.fmgain.connect(this.osc.frequency);
 }
 
 SineWave.prototype.setFmFrequency = function(fmFreq) {
