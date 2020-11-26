@@ -14,7 +14,7 @@ SineWave = function(context) {
   this.osc = this.context.createOscillator();
   this.gain = this.context.createGain();
   this.gain.gain.value = 0.5;
-  
+  this.osc.start(this.context.currentTime);
   
 
  /* this.fmosc = this.context.createOscillator();
@@ -43,7 +43,7 @@ SineWave.prototype.play = function() {
   if (!this.playing) {
     this.gain.gain.setValueAtTime(0, this.context.currentTime);
     this.osc.connect(this.gain);
-    this.osc.start(this.context.currentTime);
+    
     this.getOutNode().connect(this.context.destination);
     //this.osc.frequency.value = this.frequency;
     //this.osc.start(0)
