@@ -1,8 +1,11 @@
 var Body = window.Body = function (physics, details) {
     this.details = details;
     this.physics = physics;
-       
-    this.aSineWave = new SineWave(physics.audioContext);
+
+    var actxCall = window.webkitAudioContext || window.AudioContext;
+    aContext = new actxCall();
+    //this.audioContext = 
+    this.aSineWave = new SineWave(aContext);
     // Create the definition
     this.definition = new b2BodyDef();
     
