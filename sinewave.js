@@ -47,8 +47,9 @@ SineWave.prototype.play = function() {
     this.getOutNode().connect(this.context.destination);
     //this.osc.frequency.value = this.frequency;
     //this.osc.start(0)
-    this.gain.gain.linearRampToValueAtTime(this.amplitude, 0.1 + this.context.currentTime);
+    //this.gain.gain.linearRampToValueAtTime(this.amplitude, 0.1 + this.context.currentTime);
     //this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
+    this.gain.gain.setTargetAtTime(this.amplitude, this.context.currentTime, 0.0015);
   
     this.playing = true;
   }
@@ -62,7 +63,8 @@ SineWave.prototype.pause = function() {
     //this.gain.gain.value = this.amplitude;
     //this.gain.gain.setValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
     //this.gain.gain.setTargetAtTime(0, this.context.currentTime+0.01, release);
-    this.gain.gain.linearRampToValueAtTime(0.0, 0.1 + this.context.currentTime);
+    //this.gain.gain.linearRampToValueAtTime(0.0, 0.1 + this.context.currentTime);
+    this.gain.gain.setTargetAtTime(0, this.context.currentTime, 0.0015);
     //this.osc.stop(this.context.currentTime);
     var self = this;
    // setTimeout(function() { self.fmosc.stop(0); self.osc.stop(0); }, 10*release*1000);
