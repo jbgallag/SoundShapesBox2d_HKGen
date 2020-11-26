@@ -13,7 +13,7 @@ SineWave = function(context) {
   this.playing = false;
   this.osc = this.context.createOscillator();
   this.gain = this.context.createGain();
-  this.gain.gain.value = 0.5;
+  this.gain.gain.value = 0.25;
   this.osc.start(this.context.currentTime);
   
 
