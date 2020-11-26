@@ -3,7 +3,7 @@ var Body = window.Body = function (physics, details) {
     this.physics = physics;
 
     var actxCall = window.webkitAudioContext || window.AudioContext;
-    aContext = new actxCall();
+    this.aContext = new actxCall();
     //this.audioContext = 
     this.aSineWave = new SineWave(aContext);
     // Create the definition
