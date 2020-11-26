@@ -637,7 +637,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
                 hit = true;
-                this.PlayTone(body,false);
+                body.PlayTone(body,false);
             }
         }
     }
