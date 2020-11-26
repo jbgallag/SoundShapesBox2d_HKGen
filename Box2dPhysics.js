@@ -619,7 +619,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             }
         }
       //  console.log("massSumX: ",massSumX);
-        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 4500) {
+        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 6000) {
             xCenter = densSumX/massSumX;
             yCenter = densSumY/massSumY;
         
