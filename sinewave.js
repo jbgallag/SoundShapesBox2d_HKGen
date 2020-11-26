@@ -55,7 +55,7 @@ SineWave.prototype.play = function() {
 SineWave.prototype.pause = function() {
   if (this.playing) {
     var delay = 0.1;
-    var release = 1.50;
+    var release = 0.50;
     this.gain.gain.cancelScheduledValues(this.context.currentTime);
     this.gain.gain.value = this.amplitude;
     //this.gain.gain.setValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
