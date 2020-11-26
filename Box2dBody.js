@@ -4,7 +4,8 @@ var Body = window.Body = function (physics, aContext, details) {
 
     //var actxCall = window.webkitAudioContext || window.AudioContext;
    //this.audioContext = 
-    this.aSineWave = new SineWave(aContext);
+    if(aContext != null)
+        this.aSineWave = new SineWave(aContext);
     // Create the definition
     this.definition = new b2BodyDef();
     
