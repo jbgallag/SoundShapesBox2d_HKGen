@@ -49,7 +49,7 @@ SineWave.prototype.play = function() {
     //this.osc.start(0)
     //this.gain.gain.linearRampToValueAtTime(this.amplitude, 0.1 + this.context.currentTime);
     //this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
-    this.gain.gain.setTargetAtTime(0.25, this.context.currentTime, 0.0015);
+    this.gain.gain.setTargetAtTime(0.025, this.context.currentTime, 0.0015);
   
     this.playing = true;
   }
