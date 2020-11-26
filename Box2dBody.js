@@ -1,10 +1,9 @@
-var Body = window.Body = function (physics, details) {
+var Body = window.Body = function (physics, aContext, details) {
     this.details = details;
     this.physics = physics;
 
-    var actxCall = window.webkitAudioContext || window.AudioContext;
-    this.aContext = new actxCall();
-    //this.audioContext = 
+    //var actxCall = window.webkitAudioContext || window.AudioContext;
+   //this.audioContext = 
     this.aSineWave = new SineWave(aContext);
     // Create the definition
     this.definition = new b2BodyDef();
