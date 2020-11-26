@@ -14,7 +14,6 @@ SineWave = function(context) {
   this.osc = this.context.createOscillator();
   this.gain = this.context.createGain();
   this.gain.gain.value = 0.5;
-  this.osc.connect(this.gain);
   this.osc.start(0);
   
 
@@ -42,10 +41,12 @@ SineWave.prototype.setFrequency = function(freq) {
 
 SineWave.prototype.play = function() {
   if (!this.playing) {
+    this.gain.gain.setValueAtTime(0, this.context.currentTime);
+    this.osc.connect(this.gain);
     this.getOutNode().connect(this.context.destination);
     //this.osc.frequency.value = this.frequency;
-    //this.gain.gain.setValueAtTime(0, this.context.currentTime);
-    this.gain.gain.linearRampToValueAtTime(this.amplitude, 1.0 + this.context.currentTime);
+    //this.osc.start(0)
+    this.gain.gain.linearRampToValueAtTime(1.0, 0.1 + this.context.currentTime);
     //this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
   
     this.playing = true;
@@ -59,7 +60,8 @@ SineWave.prototype.pause = function() {
     //this.gain.gain.cancelScheduledValues(this.context.currentTime);
     //this.gain.gain.value = this.amplitude;
     //this.gain.gain.setValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
-    this.gain.gain.setTargetAtTime(0, this.context.currentTime+0.01, release);
+    //this.gain.gain.setTargetAtTime(0, this.context.currentTime+0.01, release);
+    this.gain.gain.linearRampToValueAtTime(0.0, 0.1 + this.context.currentTime);
     var self = this;
    // setTimeout(function() { self.fmosc.stop(0); self.osc.stop(0); }, 10*release*1000);
     this.playing = false;
