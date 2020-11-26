@@ -63,7 +63,7 @@ SineWave.prototype.pause = function() {
     //this.gain.gain.setValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
     //this.gain.gain.setTargetAtTime(0, this.context.currentTime+0.01, release);
     this.gain.gain.linearRampToValueAtTime(0.0, 0.1 + this.context.currentTime);
-    this.osc.stop(this.context.currentTime);
+    //this.osc.stop(this.context.currentTime);
     var self = this;
    // setTimeout(function() { self.fmosc.stop(0); self.osc.stop(0); }, 10*release*1000);
     this.playing = false;
