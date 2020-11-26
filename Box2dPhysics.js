@@ -271,7 +271,7 @@ Physics.prototype.RenderText = function(ctx,body) {
     if(this.activeLine == 1) {
         this.SetSylLeftLineOne(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
-        body.PlayTone(body,this.badTone);
+        //body.PlayTone(body,this.badTone);
         if(this.badTone)
             ctx.fillStyle = "red";
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
@@ -289,7 +289,7 @@ Physics.prototype.RenderText = function(ctx,body) {
     } else if(this.activeLine == 2) {
         this.SetSylLeftLineTwo(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
-        body.PlayTone(body,this.badTone);
+        //body.PlayTone(body,this.badTone);
          if(this.badTone)
             ctx.fillStyle = "red";
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
@@ -308,7 +308,7 @@ Physics.prototype.RenderText = function(ctx,body) {
     } else if(this.activeLine == 3) {
         this.SetSylLeftLineThree(body.details.wordType);
         this.isAGoodLine(body.details.wordType);
-        body.PlayTone(body,this.badTone);
+        //body.PlayTone(body,this.badTone);
          if(this.badTone)
             ctx.fillStyle = "red";
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
@@ -637,6 +637,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
                 hit = true;
+                this.PlayTone(body,false);
             }
         }
     }
