@@ -46,7 +46,7 @@ SineWave.prototype.play = function() {
     this.osc.frequency.value = this.frequency;
     this.gain.gain.setValueAtTime(0, this.context.currentTime);
     this.gain.gain.linearRampToValueAtTime(this.amplitude, 0.01 + this.context.currentTime);
-    this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
+    //this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
   
     this.playing = true;
   }
