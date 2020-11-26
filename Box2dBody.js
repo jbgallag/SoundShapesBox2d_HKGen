@@ -84,8 +84,8 @@ Body.prototype.draw = function (context,text,numSyl) {
     angle = this.body.GetAngle();
     var vel = this.body.GetLinearVelocity();
     var angVel = this.body.GetAngularVelocity();
-    if(angVel != 0.0)
-       this.aSineWave.setFmFrequency(Math.abs(angVel)*0.5);
+    //if(angVel != 0.0)
+    //   this.aSineWave.setFmFrequency(Math.abs(angVel)*0.5);
     // Save the context
     context.save();
     
