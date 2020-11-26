@@ -9,11 +9,11 @@ Mohit Cheppudira - http://0xfe.blogspot.com
 SineWave = function(context) {
   this.context = context;
   this.frequency = 440;
-  this.amplitude = 0.1;
+  this.amplitude = 0.01;
   this.playing = false;
   this.osc = this.context.createOscillator();
   this.gain = this.context.createGain();
-  this.gain.gain.value = 0;
+  this.gain.gain.value = 0.5;
   this.osc.connect(this.gain);
   this.osc.start(0);
   
