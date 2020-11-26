@@ -43,8 +43,8 @@ SineWave.prototype.setFrequency = function(freq) {
 SineWave.prototype.play = function() {
   if (!this.playing) {
     this.getOutNode().connect(this.context.destination);
-    this.osc.frequency.value = this.frequency;
-    this.gain.gain.setValueAtTime(0, this.context.currentTime);
+    //this.osc.frequency.value = this.frequency;
+    //this.gain.gain.setValueAtTime(0, this.context.currentTime);
     this.gain.gain.linearRampToValueAtTime(this.amplitude, 0.01 + this.context.currentTime);
     //this.gain.gain.linearRampToValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
   
@@ -56,8 +56,8 @@ SineWave.prototype.pause = function() {
   if (this.playing) {
     var delay = 0.1;
     var release = 0.50;
-    this.gain.gain.cancelScheduledValues(this.context.currentTime);
-    this.gain.gain.value = this.amplitude;
+    //this.gain.gain.cancelScheduledValues(this.context.currentTime);
+    //this.gain.gain.value = this.amplitude;
     //this.gain.gain.setValueAtTime(this.amplitude,  0.01 + this.context.currentTime);
     this.gain.gain.setTargetAtTime(0, this.context.currentTime+0.01, release);
     var self = this;
