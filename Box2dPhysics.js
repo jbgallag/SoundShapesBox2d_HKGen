@@ -53,8 +53,14 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
 
     this.halfSteps = [0,2,4,7,9];
     this.halfStepsTwo = [1,3,6,11,15];
+
+    this.sensitivity = 5000;
    
 };
+
+Physics.prototype.setSensitivity(st) {
+    this.sensitivity = st;
+}
 
 Physics.prototype.makeNewHalfSteps = function(bidx) {
     c=0;
@@ -619,7 +625,7 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
             }
         }
       //  console.log("massSumX: ",massSumX);
-        if(massSumX > 0 && !isNaN(massSumX) && massSumX > 6000) {
+        if(massSumX > 0 && !isNaN(massSumX) && massSumX > this.sensitivity) {
             xCenter = densSumX/massSumX;
             yCenter = densSumY/massSumY;
         
