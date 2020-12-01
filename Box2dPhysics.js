@@ -60,6 +60,7 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
 
 Physics.prototype.setSensitivity(st) {
     this.sensitivity = st;
+    console.log("SENSE: ",this.sensitivity);
 }
 
 Physics.prototype.makeNewHalfSteps = function(bidx) {
