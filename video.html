@@ -172,14 +172,7 @@
  
                 </script>
             
-                <script>
-                    var slider = document.getElementById("myRange");
-                    this.physics.sensitivity = slider.value;
-
-                    slider.oninput = function() {
-                        this.physics.sensitivity = this.value;
-                    }
-                </script>
+                
             </head>
         <body>
             <div >
@@ -225,6 +218,14 @@
                   cursor: pointer;
                 }
                 </style>
+                <script>
+                    var slider = document.getElementById("myRange");
+                    this.physics.sensitivity = slider.value;
+
+                    slider.oninput = function() {
+                        this.physics.sensitivity = this.value;
+                    }
+                </script>
             <div>
                 <video id='localVideo' width="720" height="405" playsinline autoplay style='visibility: hidden'></video>
             </div>
