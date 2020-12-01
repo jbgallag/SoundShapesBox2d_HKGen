@@ -171,18 +171,7 @@
                   //animate(localVideo, oContext);
  
                 </script>
-            
-                
-            </head>
-        <body>
-            <div >
-                <canvas id='output' width="720" height="405" style='float:left'></canvas>
-                <canvas id='textOutput' width="720" height="405" style='float:left'></canvas>
-            </div>
-            <div class="slidecontainer">
-                <input type="range" min="50" max="10000" value="5000" class="slider" id="myRange">
-            </div>
-                            <style>
+                           <style>
                 .slidecontainer {
                   width: 100%;
                 }
@@ -218,12 +207,22 @@
                   cursor: pointer;
                 }
                 </style>
+                
+            </head>
+        <body>
+            <div >
+                <canvas id='output' width="720" height="405" style='float:left'></canvas>
+                <canvas id='textOutput' width="720" height="405" style='float:left'></canvas>
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="50" max="10000" value="5000" class="slider" id="myRange">
+            </div>
+             
                 <script>
                     var slider = document.getElementById("myRange");
-                    this.physics.sensitivity = slider.value;
-
+                    physics.sensitivity = slider.value;
                     slider.oninput = function() {
-                        this.physics.sensitivity = this.value;
+                        physics.sensitivity = this.value;
                     }
                 </script>
             <div>
