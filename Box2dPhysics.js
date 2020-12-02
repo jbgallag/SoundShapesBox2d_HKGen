@@ -58,7 +58,7 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
    
 };
 
-Physics.prototype.setSensitivity(st) {
+Physics.prototype.setSensitivity = function(st) {
     this.sensitivity = st;
     console.log("SENSE: ",this.sensitivity);
 }
