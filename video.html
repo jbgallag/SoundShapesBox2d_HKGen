@@ -163,14 +163,15 @@
                         if(dt > 1/15) { dt = 1/15; }
                         physics.step(dt,imgData,oldData);
                         lastFrame = tm;
+                        sliderValue = document.getElementById('rangeValue');
+                        physics.sensitivity = sliderValue;
 
                     }
 
                     //animate
                     requestAnimFrame(function() { animate(video, tmpContext); });
                     frameCount++;
-                    sliderValue = document.getElementById('rangeValue');
-                    physics.sensitivity = sliderValue;
+                    
 
                 }
                   //animate(localVideo, oContext);
