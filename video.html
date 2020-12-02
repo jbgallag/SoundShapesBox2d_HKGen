@@ -227,7 +227,7 @@
                     var slider = document.getElementById("myRange");
                     var output = document.getElementById("rangeValue");
                     output.innerHTML = slider.value;
-
+                    console.log("SVin: ",slider.value);
                     slider.oninput = function() {
                         output.innerHTML = this.value;
                     }
