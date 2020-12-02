@@ -214,15 +214,7 @@
                 }
                   //animate(localVideo, oContext);
                 </script>   
-            <div >
-                <canvas id='output' width="720" height="405" style='float:left'></canvas>
-                <canvas id='textOutput' width="720" height="405" style='float:left'></canvas>
-            </div>
-            <div class="slidecontainer">
-                <input type="range" min="50" max="10000" value="5000" class="slider" id='myRange'>
-                <p>Value: <span id="rangeValue"></span></p>
-            </div>
-                <script>
+                 <script>
                     var slider = document.getElementById("myRange");
                     var output = document.getElementById("rangeValue");
                     output.innerHTML = slider.value;
@@ -231,6 +223,14 @@
                         output.innerHTML = this.value;
                     }
                 </script>
+            <div >
+                <canvas id='output' width="720" height="405" style='float:left'></canvas>
+                <canvas id='textOutput' width="720" height="405" style='float:left'></canvas>
+            </div>
+            <div class="slidecontainer">
+                <input type="range" min="50" max="10000" value="5000" class="slider" id='myRange'>
+                <p>Value: <span id="rangeValue"></span></p>
+            </div>
              
                
             <div>
