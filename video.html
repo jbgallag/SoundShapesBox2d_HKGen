@@ -67,6 +67,7 @@
                     output = document.querySelector('#output');
                     textOutput = document.querySelector('#textOutput');
                     localVideo = document.querySelector('#localVideo');
+                    slider = document.querySelector('#myRange');
                     oContext = output.getContext('2d');
  
                     localVideo.onloadstart = function() {
@@ -172,7 +173,6 @@
 
                 }
                   //animate(localVideo, oContext);
-                slider = document.querySelector('#myRange');
                 slider.oninput = function(physics) {
                     physics.sensitivity = this.value;
                 }
