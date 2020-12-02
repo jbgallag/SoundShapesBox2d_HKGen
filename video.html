@@ -164,8 +164,8 @@
                         physics.step(dt,imgData,oldData);
                         lastFrame = tm;
                         sliderValue = document.getElementById('rangeValue');
-                        physics.sensitivity = sliderValue;
-                        console.log("SV: ",sliderValue);
+                        physics.sensitivity = sliderValue.innerHTML;
+                        console.log("SV: ",sliderValue.innerHTML);
 
                     }
 
