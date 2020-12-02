@@ -169,7 +169,11 @@
                     frameCount++;
                 }
                   //animate(localVideo, oContext);
- 
+                var slider = document.getElementById("myRange");
+                    physics.sensitivity = slider.value;
+                    slider.oninput = function() {
+                        physics.sensitivity = this.value;
+                    }
                 </script>
                            <style>
                 .slidecontainer {
@@ -218,13 +222,7 @@
                 <input type="range" min="50" max="10000" value="5000" class="slider" id="myRange">
             </div>
              
-                <script>
-                    var slider = document.getElementById("myRange");
-                    physics.sensitivity = slider.value;
-                    slider.oninput = function() {
-                        physics.sensitivity = this.value;
-                    }
-                </script>
+               
             <div>
                 <video id='localVideo' width="720" height="405" playsinline autoplay style='visibility: hidden'></video>
             </div>
