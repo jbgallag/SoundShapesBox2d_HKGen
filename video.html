@@ -33,7 +33,7 @@
                 var textOutput;
                 var localVideo;
                 var localStream;
-                var slider;
+                var sliderValue;
                 var cdCount = 2;
                 var oldData = {'data':[]};
                 var imgData = {'data':[]};
@@ -67,7 +67,6 @@
                     output = document.querySelector('#output');
                     textOutput = document.querySelector('#textOutput');
                     localVideo = document.querySelector('#localVideo');
-                    slider = document.querySelector('#myRange');
                     oContext = output.getContext('2d');
  
                     localVideo.onloadstart = function() {
@@ -164,18 +163,17 @@
                         if(dt > 1/15) { dt = 1/15; }
                         physics.step(dt,imgData,oldData);
                         lastFrame = tm;
+
                     }
 
                     //animate
                     requestAnimFrame(function() { animate(video, tmpContext); });
                     frameCount++;
-
+                    sliderValue = document.getElementById('rangeValue');
+                    physics.sensitivity = sliderValue;
 
                 }
                   //animate(localVideo, oContext);
-                slider.oninput = function(physics) {
-                    physics.sensitivity = this.value;
-                }
                 </script>
                            <style>
                 .slidecontainer {
@@ -222,6 +220,16 @@
             </div>
             <div class="slidecontainer">
                 <input type="range" min="50" max="10000" value="5000" class="slider" id='myRange'>
+                <p>Value: <span id="rangeValue"></span></p>
+                <script>
+                    var slider = document.getElementById("myRange");
+                    var output = document.getElementById("rangeValue");
+                    output.innerHTML = slider.value;
+
+                    slider.oninput = function() {
+                        output.innerHTML = this.value;
+                    }
+                </script>
             </div>
              
                
