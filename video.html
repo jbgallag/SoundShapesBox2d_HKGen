@@ -33,7 +33,6 @@
                 var textOutput;
                 var localVideo;
                 var localStream;
-                var sliderValue;
                 var cdCount = 2;
                 var oldData = {'data':[]};
                 var imgData = {'data':[]};
@@ -163,7 +162,7 @@
                         if(dt > 1/15) { dt = 1/15; }
                         physics.step(dt,imgData,oldData);
                         lastFrame = tm;
-                        sliderValue = document.getElementById('rangeValue');
+                        var sliderValue = document.getElementById('rangeValue');
                         physics.sensitivity = sliderValue.innerHTML;
                         console.log("SV: ",sliderValue.innerHTML);
 
