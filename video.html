@@ -33,6 +33,7 @@
                 var textOutput;
                 var localVideo;
                 var localStream;
+                var slider;
                 var cdCount = 2;
                 var oldData = {'data':[]};
                 var imgData = {'data':[]};
@@ -171,7 +172,7 @@
 
                 }
                   //animate(localVideo, oContext);
-                var slider = document.querySelector('#myRange');
+                slider = document.querySelector('#myRange');
                 slider.oninput = function(physics) {
                     physics.sensitivity = this.value;
                 }
