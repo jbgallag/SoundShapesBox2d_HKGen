@@ -213,16 +213,14 @@
 
                 }
                   //animate(localVideo, oContext);
-                </script>   
-                 <script>
-                    var slider = document.getElementById("myRange");
+                   var slider = document.getElementById("myRange");
                     var output = document.getElementById("rangeValue");
                     output.innerHTML = slider.value;
                     console.log("SVin: ",slider.value);
                     slider.oninput = function() {
                         output.innerHTML = this.value;
                     }
-                </script>
+                </script>   
             <div >
                 <canvas id='output' width="720" height="405" style='float:left'></canvas>
                 <canvas id='textOutput' width="720" height="405" style='float:left'></canvas>
