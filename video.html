@@ -167,11 +167,13 @@
                     //animate
                     requestAnimFrame(function() { animate(video, tmpContext); });
                     frameCount++;
+
+
                 }
                   //animate(localVideo, oContext);
                 var slider = document.getElementById("myRange");
-                slider.oninput = function() {
-                        physics.sensitivity = this.value;
+                slider.oninput = function(physics) {
+                    physics.sensitivity = this.value;
                 }
                 </script>
                            <style>
