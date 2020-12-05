@@ -1,5 +1,6 @@
 var Physics = window.Physics = function(element,elementThree,aContext,myWords,scale) {
-    var gravity = new b2Vec2(0,4.8);
+    this.g = 4.8;
+    var gravity = new b2Vec2(0,0);
     this.world = new b2World(gravity, true);
     this.element = element;
    // this.elementTwo = elementTwo;
@@ -45,22 +46,24 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
     this.playing = false;
     this.amplitude = 0.1;
     this.audioContext = aContext;
-    this.badTone = false;
     this.setWords();
 
     this.lastResetTime = 0;
-    this.resetFreq = 50;
+    this.resetFreq = 150;
 
-    this.halfSteps = [0,2,4,7,9];
+    this.halfSteps = [0,2,4,7,9,12];
     this.halfStepsTwo = [1,3,6,11,15];
 
     this.sensitivity = 5000;
    
 };
 
+Physics.prototype.setG = function(g) {
+    this.world.SetGravity({x: 0.0, y: g*this.g});
+}
+
 Physics.prototype.setSensitivity = function(st) {
     this.sensitivity = st;
-    console.log("SENSE: ",this.sensitivity);
 }
 
 Physics.prototype.makeNewHalfSteps = function(bidx) {
@@ -75,7 +78,8 @@ Physics.prototype.makeNewHalfSteps = function(bidx) {
     if(newList.length != 0) {
         this.halfSteps = newList;
     } else {
-        this.halfSteps = [0,2,4,7,9];
+        this.halfSteps = [0,2,4,7,9,12];
+        //this.UpdateTones();
     }
 }
 
@@ -185,11 +189,12 @@ Physics.prototype.step = function (dt,imgData,oldData) {
                         3); // position iterations
         this.lastResetTime += 1;
     }
+    //console.log("INFO: ",this.dtRemaining,this.lastResetTime)
     this.RenderWorld(imgData,oldData,this.context,this.contextThree);
-    //if(this.lastResetTime >= this.resetFreq) {
-    //    this.ResetBodiesNotHit();
-    //    this.lastResetTime = 0;
-    //}
+    if(this.lastResetTime >= this.resetFreq) {
+        this.ResetBodiesNotHit();
+        this.lastResetTime = 0;
+    }
     //this.RenderWorldTwo(this.contextTwo);
    }
 
@@ -203,26 +208,27 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
     while (obj) {
         var body = obj.GetUserData();
         if (body) {
-            if(body.details.wordType == "verb")
-                body.draw(ctx,this.myVerb,this.NumVerbSyl);
-            if(body.details.wordType == "noun")
-                body.draw(ctx,this.myNoun,this.NumNounSyl);
-            if(body.details.wordType == "adj")
-                body.draw(ctx,this.myAdj,this.NumAdjectiveSyl);
-            if(body.details.wordType == "adv")
-                body.draw(ctx,this.myAdv,this.NumAdverbSyl);
+            if(body.details.type != 'static') {
+                if(body.details.wordType == "verb")
+                    body.draw(ctx,this.myVerb,this.NumVerbSyl);
+                if(body.details.wordType == "noun")
+                    body.draw(ctx,this.myNoun,this.NumNounSyl);
+                if(body.details.wordType == "adj")
+                    body.draw(ctx,this.myAdj,this.NumAdjectiveSyl);
+                if(body.details.wordType == "adv")
+                    body.draw(ctx,this.myAdv,this.NumAdverbSyl);
            // if(body.details.wordType == "pro")
              //   body.draw(ctx,this.myPro);
             //if(body.details.wordType == "pre")
               //  body.draw(ctx,this.myPre);
-            wasHit = false;
-            wasHit = this.HitCenterOfMass(imgData,oldData,body);
-            if(wasHit && body.details.impulseActive) {
-                this.RenderText(ctx2,body);
-            }
-
-            
-                
+                wasHit = false;
+                wasHit = this.HitCenterOfMass(imgData,oldData,body);
+                if(wasHit && body.details.impulseActive) {
+                    this.RenderText(ctx2,body);
+                    body.PlayTone(body);
+                    //body.details.badTone = false;
+                }
+            }   
         }
     obj = obj.GetNext();
     }
@@ -249,7 +255,9 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
     }
     ctx.restore();
 }*/
+Physics.prototype.DoSyllableMath = function() {
 
+}
 Physics.prototype.RenderText = function(ctx,body) {
     ctx.save();
     ctx.fillStyle = "blue";
@@ -277,15 +285,15 @@ Physics.prototype.RenderText = function(ctx,body) {
     
     if(this.activeLine == 1) {
         this.SetSylLeftLineOne(body.details.wordType);
-        this.isAGoodLine(body.details.wordType);
+        this.isAGoodLine(body);
         //body.PlayTone(body,this.badTone);
-        if(this.badTone)
+        if(body.details.badTone)
             ctx.fillStyle = "red";
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
-        this.badTone = false;
-        if(this.sylsLeftInLineOne > 0)
-            this.ResetBodiesNotHit();
+        //this.badTone = false;
+        //if(this.sylsLeftInLineOne > 0)
+         //   this.ResetBodiesNotHit();
         if(this.sylsLeftInLineOne <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
@@ -295,16 +303,16 @@ Physics.prototype.RenderText = function(ctx,body) {
         }
     } else if(this.activeLine == 2) {
         this.SetSylLeftLineTwo(body.details.wordType);
-        this.isAGoodLine(body.details.wordType);
+        this.isAGoodLine(body);
         //body.PlayTone(body,this.badTone);
-         if(this.badTone)
+         if(body.details.badTone)
             ctx.fillStyle = "red";
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
-        this.badTone = false;
+        //this.badTone = false;
 
-        if(this.sylsLeftInLineTwo > 0)
-            this.ResetBodiesNotHit();
+        //if(this.sylsLeftInLineTwo > 0)
+        //    this.ResetBodiesNotHit();
         if(this.sylsLeftInLineTwo <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + fontSize;
@@ -314,15 +322,15 @@ Physics.prototype.RenderText = function(ctx,body) {
         }
     } else if(this.activeLine == 3) {
         this.SetSylLeftLineThree(body.details.wordType);
-        this.isAGoodLine(body.details.wordType);
+        this.isAGoodLine(body);
         //body.PlayTone(body,this.badTone);
-         if(this.badTone)
+         if(body.details.badTone)
             ctx.fillStyle = "red";
         ctx.fillText(this.myText, this.textPosX, this.textPosY);
 
-        this.badTone = false;
-        if(this.sylsLeftInLineThree > 0)
-            this.ResetBodiesNotHit();
+        //this.badTone = false;
+        //if(this.sylsLeftInLineThree > 0)
+        //    this.ResetBodiesNotHit();
         if(this.sylsLeftInLineThree <= 0) {
             this.myText = "";
             this.textPosY = this.textPosY + (fontSize*3);
@@ -405,14 +413,44 @@ Physics.prototype.SetSylLeftLineThree = function(wtype) {
     }
 }
 
-Physics.prototype.ResetBodiesNotHit = function() {
+Physics.prototype.weakBrownian = function() {
     var obj = this.world.GetBodyList();
-   
+    
     while (obj) {
         
         var body = obj.GetUserData();
         if (body) {
-            this.setWords();
+            body.body.ApplyImpulse({x: (this.getRandomInt(-100,100)*this.getRandomInt(100,300)), y: (this.getRandomInt(-100,100)*this.getRandomInt(100,300))}, body.body.GetWorldCenter());
+            //this.SetWordSylLeft(body,sylLeft);
+        }
+        obj = obj.GetNext();
+    }
+}
+
+Physics.prototype.UpdateTones = function() {
+    var obj = this.world.GetBodyList();
+    
+    while (obj) {
+        
+        var body = obj.GetUserData();
+        if (body) {
+            if(body.details.type != 'static') {
+                body.details.tone = body.details.tone * Math.pow(1.059463094359,2);
+            }
+        }
+        obj = obj.GetNext();
+    }
+}
+
+Physics.prototype.ResetBodiesNotHit = function() {
+    var obj = this.world.GetBodyList();
+    
+    while (obj) {
+        
+        var body = obj.GetUserData();
+        if (body) {
+            if(body.details != 'static')
+                this.setWords();
             //this.SetWordSylLeft(body,sylLeft);
         }
         obj = obj.GetNext();
@@ -644,30 +682,51 @@ Physics.prototype.HitCenterOfMass = function(imgData,oldData,body) {
                 body.body.ApplyImpulse({ x: (xNorm*500000), y: (yNorm*500000)}, body.body.GetWorldCenter());
                 body.details.impulseActive = true;
                 hit = true;
-                body.PlayTone(body,false);
+                
+                
             }
         }
     }
     return hit;
 };
 
-Physics.prototype.isAGoodLine = function(wtype) {
+Physics.prototype.showBadTones = function() {
+    var obj = this.world.GetBodyList();
+    
+    while (obj) {
+        
+        var body = obj.GetUserData();
+        if (body) {
+            if(body.details.type != 'static')
+                console.log("Bad Tones: ",body.details.badTone)
+            //this.SetWordSylLeft(body,sylLeft);
+        }
+        obj = obj.GetNext();
+    }
+}
+
+Physics.prototype.isAGoodLine = function(body) {
     switch (this.activeLine) {
         case 1 :
             if(this.sylsLeftInLineOne < 0) {
-                this.badTone = true;
+                console.log("Line #1: ",this.sylsLeftInLineOne);
+                body.details.badTone = true;
             }
         case 2 :
             if(this.sylsLeftInLineTwo < 0) {
-                this.badTone = true;
+                console.log("Line #2: ",this.sylsLeftInLineTwo);
+                body.details.badTone = true;
             }
         case 3 :
             if(this.sylsLeftInLineThree < 0) {
-                this.badTone = true;
+                console.log("Line #3: ",this.sylsLeftInLineThree);
+                body.details.badTone = true;
             }
         default:
             break;
     }
+    console.log("SYLS: ",this.sylsLeftInLineOne,this.sylsLeftInLineTwo,this.sylsLeftInLineThree);
+    this.showBadTones();
 };
 
 Physics.prototype.isIn = function(x,y,body) {
@@ -692,6 +751,7 @@ Physics.prototype.collision = function () {
         if(body.details.impulseActive) {
             body.details.impulseActive = false;
             body.PauseTone(body);
+            body.details.badTone = false;
         }
     }
     

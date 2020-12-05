@@ -4,8 +4,10 @@ var Body = window.Body = function (physics, aContext, details) {
 
     //var actxCall = window.webkitAudioContext || window.AudioContext;
    //this.audioContext = 
-    if(aContext != null)
+    if(aContext != null) {
         this.aSineWave = new SineWave(aContext);
+        this.aSineWave2 = new SineWave(aContext);
+    }
     // Create the definition
     this.definition = new b2BodyDef();
     
@@ -217,19 +219,27 @@ Body.prototype.setTextColor = function (context,vel) {
     }
 }
 
-Body.prototype.PlayTone = function(caller,badTone) {
+Body.prototype.PlayTone = function(caller) {
     if(!this.playing) {
         this.playing = true;
         this.player = caller;
         //this.aSineWave = new SineWave(physics.audioContext);
         // this.setToneByYLocation();
-        this.aSineWave.setFrequency(this.GetFreq(badTone));
-        //this.aSineWave.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
+        console.log("PT: ",this.details.badTone);
+        this.aSineWave.setFrequency(this.GetFreq(this.details.badTone,false));
+        this.aSineWave2.setFrequency(this.GetFreq(this.details.badTone,true));
+        if(this.details.badTone) {
+            this.aSineWave.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
+            this.aSineWave2.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
+            //this.details.badTone = false;
+        }
         this.aSineWave.setAmplitude(this.amplitude);
+        this.aSineWave2.setAmplitude(this.amplitude);
         //   for (var i = 0; i < this.connections.length; i++) {
         //     this.aSineWave.getOutNode().connect(this.connections[i]);
         //}
         this.aSineWave.play();
+        this.aSineWave2.play();
     }
 }
 
@@ -238,6 +248,9 @@ Body.prototype.PauseTone = function (caller) {
         if(this.player == caller) {
             this.playing = false;
             this.aSineWave.pause();
+            this.aSineWave2.pause();
+            this.aSineWave.setFmFrequency(0);
+            this.aSineWave2.setFmFrequency(0);
         }
     }
 }
@@ -250,20 +263,24 @@ Body.prototype.getRandomInt = function(min, max) {
 
 
 
-Body.prototype.GetFreq = function(badTone) {
+Body.prototype.GetFreq = function(badTone,low) {
     //var halfSteps = [0,2,4,7,9];
     //var halfStepsTwo = [1,3,6,11,15];
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
-    if(!badTone) {
+    //if(!badTone) {
         idx = this.getRandomInt(0,this.physics.halfSteps.length-1);
-        freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfSteps[idx]);
+        if(!low) {
+            freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfSteps[idx]);
+        } else {
+            freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfSteps[idx]-12);
+        }
         this.physics.makeNewHalfSteps(idx);
-    } else {
+   /* } else {
         idx = this.getRandomInt(0,this.physics.halfStepsTwo.length-1);
-        freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfStepsTwo[idx]);
+        freq = 620.0 * Math.pow(1.059463094359,this.physics.halfStepsTwo[idx]);
         this.physics.makeNewHalfStepsTwo(idx);
-    }
+    }*/
    /* if(this.details.wordType == "noun" || this.details.wordType == "verb") {
         if(Math.random() > 0.5) {
             freq = this.details.tone * Math.pow(1.059463094359,halfSteps[Math.floor(Math.random()*halfSteps.length)]);
