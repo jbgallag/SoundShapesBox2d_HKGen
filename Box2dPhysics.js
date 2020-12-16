@@ -51,10 +51,12 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
     this.lastResetTime = 0;
     this.resetFreq = 150;
 
-    this.halfSteps = [0,2,4,7,9,12];
-    this.halfStepsTwo = [1,3,6,11,15];
+    this.halfSteps =    [0,2,4,5,7,9,11,12];
+    this.halfStepsTwo = [4,5,7,9,11,12,14,16];
 
     this.sensitivity = 5000;
+
+    this.noteCounter = 0;
    
 };
 
@@ -78,7 +80,7 @@ Physics.prototype.makeNewHalfSteps = function(bidx) {
     if(newList.length != 0) {
         this.halfSteps = newList;
     } else {
-        this.halfSteps = [0,2,4,7,9,12];
+        this.halfSteps = [0,2,4,5,7,9,11,12];
         //this.UpdateTones();
     }
 }
@@ -86,7 +88,7 @@ Physics.prototype.makeNewHalfSteps = function(bidx) {
 Physics.prototype.makeNewHalfStepsTwo = function(bidx) {
     c=0;
     newList = []
-    for(i=0; i<this.makeNewHalfStepsTwo.length; i++) {
+    for(i=0; i<this.halfStepsTwo.length; i++) {
         if(i != bidx) {
             newList[c] = this.halfStepsTwo[i];
             c++;
@@ -95,7 +97,7 @@ Physics.prototype.makeNewHalfStepsTwo = function(bidx) {
     if(newList.length != 0) {
         this.halfStepsTwo = newList;
     } else {
-        this.halfStepsTwo = [1,3,6,11,15];
+        this.halfStepsTwo = [4,5,7,9,11,12,14,16];
     }
 }
 
@@ -225,7 +227,10 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
                 wasHit = this.HitCenterOfMass(imgData,oldData,body);
                 if(wasHit && body.details.impulseActive) {
                     this.RenderText(ctx2,body);
-                    body.PlayTone(body);
+                    body.PlayTone(body,this.noteCounter);
+                    this.noteCounter++;
+                    if(this.noteCounter > this.halfSteps.length-1)
+                        this.noteCounter = 0;
                     //body.details.badTone = false;
                 }
             }   
@@ -709,24 +714,20 @@ Physics.prototype.isAGoodLine = function(body) {
     switch (this.activeLine) {
         case 1 :
             if(this.sylsLeftInLineOne < 0) {
-                console.log("Line #1: ",this.sylsLeftInLineOne);
                 body.details.badTone = true;
             }
         case 2 :
             if(this.sylsLeftInLineTwo < 0) {
-                console.log("Line #2: ",this.sylsLeftInLineTwo);
                 body.details.badTone = true;
             }
         case 3 :
             if(this.sylsLeftInLineThree < 0) {
-                console.log("Line #3: ",this.sylsLeftInLineThree);
                 body.details.badTone = true;
             }
         default:
             break;
     }
-    console.log("SYLS: ",this.sylsLeftInLineOne,this.sylsLeftInLineTwo,this.sylsLeftInLineThree);
-    this.showBadTones();
+    //this.showBadTones();
 };
 
 Physics.prototype.isIn = function(x,y,body) {

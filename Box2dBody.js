@@ -219,15 +219,24 @@ Body.prototype.setTextColor = function (context,vel) {
     }
 }
 
-Body.prototype.PlayTone = function(caller) {
+Body.prototype.PlayTone = function(caller,cnt) {
     if(!this.playing) {
         this.playing = true;
         this.player = caller;
         //this.aSineWave = new SineWave(physics.audioContext);
         // this.setToneByYLocation();
-        console.log("PT: ",this.details.badTone);
-        this.aSineWave.setFrequency(this.GetFreq(this.details.badTone,false));
-        this.aSineWave2.setFrequency(this.GetFreq(this.details.badTone,true));
+        //console.log("PT: ",this.physics.halfSteps.length,this.physics.halfStepsTwo.length);
+        idx = -1;
+        if(cnt == -1) {
+            idx = this.getRandomInt(0,this.physics.halfSteps.length-1);
+        } else {
+            idx = cnt;
+        }
+        this.aSineWave.setFrequency(this.GetFreq(this.details.badTone,false,idx));
+        this.aSineWave2.setFrequency(this.GetFreq(this.details.badTone,true,idx));
+        //this.physics.makeNewHalfSteps(idx);
+        //this.physics.makeNewHalfStepsTwo(idx);
+        
         if(this.details.badTone) {
             this.aSineWave.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
             this.aSineWave2.setFmFrequency(Math.abs(this.body.GetAngularVelocity()));
@@ -263,19 +272,18 @@ Body.prototype.getRandomInt = function(min, max) {
 
 
 
-Body.prototype.GetFreq = function(badTone,low) {
+Body.prototype.GetFreq = function(badTone,low,idx) {
     //var halfSteps = [0,2,4,7,9];
     //var halfStepsTwo = [1,3,6,11,15];
     //var halfStepsTwo = [0,2,3,6,8,11];
     var freq = 0.0;
     //if(!badTone) {
-        idx = this.getRandomInt(0,this.physics.halfSteps.length-1);
+        console.log("TMYK: ",this.physics.halfSteps[idx],this.physics.halfStepsTwo[idx]);
         if(!low) {
             freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfSteps[idx]);
         } else {
-            freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfSteps[idx]-12);
+            freq = this.details.tone * Math.pow(1.059463094359,this.physics.halfStepsTwo[idx]);
         }
-        this.physics.makeNewHalfSteps(idx);
    /* } else {
         idx = this.getRandomInt(0,this.physics.halfStepsTwo.length-1);
         freq = 620.0 * Math.pow(1.059463094359,this.physics.halfStepsTwo[idx]);
