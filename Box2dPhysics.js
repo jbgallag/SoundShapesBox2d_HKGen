@@ -106,7 +106,7 @@ Physics.prototype.getNextChord4 = function() {
 
 Physics.prototype.getMidiNote = function() {
     coin = Math.random();
-    if(this.noteCounter % 64 == 0) {
+    if(this.noteCounter % 8 == 0) {
         if(this.halfSteps.length > 1) {
             if(coin > 0.0 && coin < 0.25) {
                 idx = this.getRandomInt(0,this.halfSteps.length-1);
@@ -314,7 +314,7 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
                     this.RenderText(ctx2,body);
                     body.PlayTone(body,this.getMidiNote());
                     this.noteCounter++;
-                    if(this.noteCounter > 64)
+                    if(this.noteCounter > 8)
                         this.noteCounter = 0;
                     //body.details.badTone = false;
                 }
