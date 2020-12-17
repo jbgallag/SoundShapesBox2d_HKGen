@@ -51,14 +51,99 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
     this.lastResetTime = 0;
     this.resetFreq = 150;
 
-    this.halfSteps =    [0,2,4,5,7,9,11,12];
-    this.halfStepsTwo = [4,5,7,9,11,12,14,16];
+    //this.halfSteps =    [0,2,4,5,7,9,11,12];
+    //this.halfStepsTwo = [4,5,7,9,11,12,14,16];
 
+    this.halfSteps = [0,4,7,9,12];
+    this.halfStepsTwo = [0,2,6,7,9,11];
     this.sensitivity = 5000;
 
     this.noteCounter = 0;
+
+    this.chord1 = [42,47];
+    this.chord2 = [46,51];
+    this.chord3 = [49,54];
+    this.chord4 = [53,58];
+    this.chord5 = [27,32];
+    this.crd1cnt = 0;
+    this.crd2cnt = 0;
+    this.crd3cnt = 0;
+    this.crd4cnt = 0;
    
 };
+
+Physics.prototype.getNextChord1 = function() {
+    idx = this.crd1cnt;
+    if(this.crd1cnt == 1)
+        this.crd1cnt = 0
+    this.crd1cnt++;
+    return this.chord1[idx];
+}
+
+Physics.prototype.getNextChord2 = function() {
+    idx = this.crd2cnt;
+    if(this.crd2cnt == 1)
+        this.crd2cnt = 0
+    this.crd2cnt++;
+    return this.chord2[idx];
+}
+
+Physics.prototype.getNextChord3 = function() {
+    idx = this.crd3cnt;
+    if(this.crd3cnt == 1)
+        this.crd3cnt = 0
+    this.crd3cnt++;
+    return this.chord3[idx];
+}
+
+Physics.prototype.getNextChord4 = function() {
+    idx = this.crd4cnt;
+    if(this.crd4cnt == 1)
+        this.crd4cnt = 0
+    this.crd4cnt++;
+    return this.chord4[idx];
+}
+
+Physics.prototype.getMidiNote = function() {
+    coin = Math.random();
+    if(this.noteCounter % 64 == 0) {
+        if(this.halfSteps.length > 1) {
+            if(coin > 0.0 && coin < 0.25) {
+                idx = this.getRandomInt(0,this.halfSteps.length-1);
+                midi = this.getNextChord1() + this.halfSteps[idx]
+                this.makeNewHalfSteps(idx);
+            } else if(coin > 0.25 && coin < 0.5) {
+                idx = this.getRandomInt(0,this.halfSteps.length-1);
+                midi = this.getNextChord2() + this.halfSteps[idx]
+                this.makeNewHalfSteps(idx);
+            } else if(coin > 0.5 && coin < 0.75) {
+                idx = this.getRandomInt(0,this.halfSteps.length-1);
+                midi = this.getNextChord3() + this.halfSteps[idx]
+                this.makeNewHalfSteps(idx);
+            } else if(coin > 0.75) {
+                idx = this.getRandomInt(0,this.halfSteps.length-1);
+                midi = this.getNextChord4() + this.halfSteps[idx]
+                this.makeNewHalfSteps(idx);
+            }
+        } else {
+            midi = this.getNextChord1() + this.halfSteps[0]
+            this.makeNewHalfSteps(0);
+        }
+    } else {
+        if(this.halfSteps.length > 1) {
+            idx = this.getRandomInt(0,this.halfSteps.length-1);
+            midi = this.getNextChord1() + this.halfSteps[idx]
+            this.makeNewHalfSteps(idx);
+        } else {
+            midi = this.getNextChord1() + this.halfSteps[0]
+            this.makeNewHalfSteps(0);
+
+        }
+    }
+    console.log("MIDIP: ",midi,coin,this.halfSteps.length);
+    return midi;
+}
+
 
 Physics.prototype.setG = function(g) {
     this.world.SetGravity({x: 0.0, y: g*this.g});
@@ -80,7 +165,7 @@ Physics.prototype.makeNewHalfSteps = function(bidx) {
     if(newList.length != 0) {
         this.halfSteps = newList;
     } else {
-        this.halfSteps = [0,2,4,5,7,9,11,12];
+        this.halfSteps = [0,4,7,9,12];
         //this.UpdateTones();
     }
 }
@@ -227,9 +312,9 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
                 wasHit = this.HitCenterOfMass(imgData,oldData,body);
                 if(wasHit && body.details.impulseActive) {
                     this.RenderText(ctx2,body);
-                    body.PlayTone(body,this.noteCounter);
+                    body.PlayTone(body,this.getMidiNote());
                     this.noteCounter++;
-                    if(this.noteCounter > this.halfSteps.length-1)
+                    if(this.noteCounter > 64)
                         this.noteCounter = 0;
                     //body.details.badTone = false;
                 }
