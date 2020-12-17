@@ -56,6 +56,8 @@ var Physics = window.Physics = function(element,elementThree,aContext,myWords,sc
 
     this.halfSteps = [0,4,7,9,12];
     this.halfStepsTwo = [0,2,6,7,9,11];
+
+    this.rootNote = 42;
     this.sensitivity = 5000;
 
     this.noteCounter = 0;
@@ -104,49 +106,23 @@ Physics.prototype.getNextChord4 = function() {
     return this.chord4[idx];
 }
 
-Physics.prototype.getMidiNote = function() {
+Physics.prototype.setMidiNote = function() {
+    idx = this.getRandomInt(0,this.halfSteps.length-1);
+    this.makeNewHalfSteps(idx);
+    return this.rootNote + this.halfSteps[idx];
+}
+Physics.prototype.setRootNote = function() {
     coin = Math.random();
-    if(this.noteCounter % 8 == 0) {
-        this.noteCounter = 0;
-        if(this.halfSteps.length > 1) {
-            if(coin > 0.0 && coin < 0.25) {
-                idx = this.getRandomInt(0,this.halfSteps.length-1);
-                midi = this.getNextChord1() + this.halfSteps[idx]
-                this.makeNewHalfSteps(idx);
-                console.log("CHORD1: ",midi);
-            } else if(coin > 0.25 && coin < 0.5) {
-                idx = this.getRandomInt(0,this.halfSteps.length-1);
-                midi = this.getNextChord2() + this.halfSteps[idx]
-                this.makeNewHalfSteps(idx);
-                console.log("CHORD2: ",midi);
-            } else if(coin > 0.5 && coin < 0.75) {
-                idx = this.getRandomInt(0,this.halfSteps.length-1);
-                midi = this.getNextChord3() + this.halfSteps[idx]
-                this.makeNewHalfSteps(idx);
-                console.log("CHORD3: ",midi);
-            } else if(coin > 0.75) {
-                idx = this.getRandomInt(0,this.halfSteps.length-1);
-                midi = this.getNextChord4() + this.halfSteps[idx]
-                this.makeNewHalfSteps(idx);
-                console.log("CHORD4: ",midi);
-            }
-        } else {
-            midi = this.getNextChord1() + this.halfSteps[0]
-            this.makeNewHalfSteps(0);
-        }
-    } else {
-        if(this.halfSteps.length > 1) {
-            idx = this.getRandomInt(0,this.halfSteps.length-1);
-            midi = this.getNextChord1() + this.halfSteps[idx]
-            this.makeNewHalfSteps(idx);
-        } else {
-            midi = this.getNextChord1() + this.halfSteps[0]
-            this.makeNewHalfSteps(0);
-
-        }
+    if(coin > 0.0 && coin < 0.25) {
+        this.rootNote = this.getNextChord1();
+    } else if(coin > 0.25 && coin < 0.5) {
+        this.rootNote = this.getNextChord2();
+    } else if(coin > 0.5 && coin < 0.75) {
+        this.rootNote = this.getNextChord3();
+    } else if(coin > 0.75) {
+        this.rootNote = this.getNextChord4();
     }
-    console.log("MIDIP: ",midi,coin,this.halfSteps.length);
-    return midi;
+    console.log("Changed Root Note! ",this.rootNote);
 }
 
 
@@ -317,8 +293,8 @@ Physics.prototype.RenderWorld = function(imgData,oldData,ctx,ctx2) {
                 wasHit = this.HitCenterOfMass(imgData,oldData,body);
                 if(wasHit && body.details.impulseActive) {
                     this.RenderText(ctx2,body);
-                    body.PlayTone(body,this.getMidiNote());
-                    this.noteCounter++;
+                    body.PlayTone(body,this.setMidiNote());
+                    
                     
                     //body.details.badTone = false;
                 }

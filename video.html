@@ -201,12 +201,16 @@
                         var dt = (tm - lastFrame) / 1000;
                         if(dt > 1/15) { dt = 1/15; }
                         physics.step(dt,imgData,oldData);
+                        physics.note
                         //physics.setG(Math.sin(-frameCount/100));
                         if(frameCount % 100 == 0)
                             physics.weakBrownian();
+                        if(frameCount % 300 == 0)
+                            physics.setRootNote();
                         lastFrame = tm;
                         var sliderValue = document.getElementById('rangeValue');
                         physics.setSensitivity(sliderValue.innerHTML);
+
                         //physics.sensitivity = sliderValue.innerHTML;
                         //console.log("SV: ",sliderValue.innerHTML);
                       //  prevTog = document.getElementById("oo").innerHTML;
