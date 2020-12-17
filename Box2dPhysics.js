@@ -113,18 +113,22 @@ Physics.prototype.getMidiNote = function() {
                 idx = this.getRandomInt(0,this.halfSteps.length-1);
                 midi = this.getNextChord1() + this.halfSteps[idx]
                 this.makeNewHalfSteps(idx);
+                console.log("CHORD1: ",midi);
             } else if(coin > 0.25 && coin < 0.5) {
                 idx = this.getRandomInt(0,this.halfSteps.length-1);
                 midi = this.getNextChord2() + this.halfSteps[idx]
                 this.makeNewHalfSteps(idx);
+                console.log("CHORD2: ",midi);
             } else if(coin > 0.5 && coin < 0.75) {
                 idx = this.getRandomInt(0,this.halfSteps.length-1);
                 midi = this.getNextChord3() + this.halfSteps[idx]
                 this.makeNewHalfSteps(idx);
+                console.log("CHORD3: ",midi);
             } else if(coin > 0.75) {
                 idx = this.getRandomInt(0,this.halfSteps.length-1);
                 midi = this.getNextChord4() + this.halfSteps[idx]
                 this.makeNewHalfSteps(idx);
+                console.log("CHORD4: ",midi);
             }
         } else {
             midi = this.getNextChord1() + this.halfSteps[0]
